@@ -7,22 +7,20 @@
 </template>
 
 <script>
-  import axios from 'axios'
   import mock from '@/mock/mock.js';
   export default {
     name: 'Home',
     methods: {
       getUser() {
-        axios.get('http://localhost:8080/user')
-          .then(function(res) {
+        this.$api.getUser().then(function(res) {
             alert(JSON.stringify(res.data));
           }).catch(function(res) {
             alert(res);
           });
+          
       },
       getMenu() {
-        axios.get('http://localhost:8080/menu')
-          .then(function(res) {
+        this.$api.getUser().then(function(res) {
             alert(JSON.stringify(res.data));
           }).catch(function(res) {
             alert(res);
