@@ -6,7 +6,7 @@
 </template>
 
 <script>
-  import mock from '@/mock/mock.js';
+  import mock from '@/mock/index.js';
   import Cookies from "js-cookie";
   import router from '@/router'
   export default {
