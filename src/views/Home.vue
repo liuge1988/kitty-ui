@@ -8,7 +8,6 @@
 				<div class="tools" @click.prevent="collapse">
 					<i class="el-icon-menu"></i>
 				</div>
-					<!-- <i class="fa fa-align-justify"></i> -->
 			</el-col>
 			<el-col :span="10">
 				<div class="hearNavBar">
@@ -21,6 +20,9 @@
 				</div>
 			</el-col>
 			<el-col :span="6" class="userinfo">
+          <span class="el-dropdown-link">
+            <ThemePicker></ThemePicker>
+          </span>
         <el-dropdown @command="handleCommand">
           <span class="el-dropdown-link lang-inner">
             <span id="language">中文</span><i class="el-icon-arrow-down el-icon--right"></i>
@@ -93,8 +95,12 @@
 
 <script>
 import mock from "@/mock/index.js";
+import ThemePicker from "@/components/ThemePicker"
 export default {
-  name: "Home",
+  name: "Home", 
+  components:{
+        ThemePicker
+  },
   data() {
     return {
       isCollapse: false,
