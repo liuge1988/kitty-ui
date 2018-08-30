@@ -5,8 +5,7 @@
         <img :src="this.logo" /> <div>{{$store.state.collapse?'':sysName}}</div>
     </div>
     <!-- 导航菜单 -->
-    <el-menu default-active="1-1" :class="$store.state.collapse?'menu-bar-collapse-width':'menu-bar-width'"
-      :collapse="$store.state.collapse" @open="handleopen" @close="handleclose" @select="handleselect">
+    <el-menu default-active="1-1" :class="$store.state.collapse?'menu-bar-collapse-width':'menu-bar-width'" @open="handleopen" @close="handleclose" @select="handleselect" :collapse="$store.state.collapse">
       <el-submenu index="1">
         <template slot="title">
           <i class="el-icon-location"></i>
@@ -75,7 +74,7 @@ export default {
     top: 0px;
     height: 60px;   
     line-height: 60px;
-    background: #545c64;
+    background: #4b5f6e;
     img {
         width: 40px;
         height: 40px;
