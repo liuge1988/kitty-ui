@@ -28,6 +28,6 @@ export default {
     top: 0px;
     left: 0px;
     right: 0px;
-    background: #504e6180;
+    background: #b4b3bb80;
   }
 </style>

@@ -8,8 +8,6 @@ import api from './http/index'
 import i18n from './i18n'
 import store from './store'
 
-Vue.config.productionTip = false
-
 Vue.use(ElementUI)
 Vue.use(api)
 

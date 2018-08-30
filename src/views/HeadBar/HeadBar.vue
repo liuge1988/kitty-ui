@@ -1,8 +1,8 @@
 <template> 
-  <div class="container" :class="$store.state.collapse?'menu-bar-collapse-width':'menu-bar-width'">
+  <div class="container" :class="$store.state.app.collapse?'menu-bar-collapse-width':'menu-bar-width'">
     <!-- 导航收缩 -->
     <span class="hamburger-container">
-      <Hamburger :toggleClick="collapse" :isActive="$store.state.collapse"></Hamburger>
+      <Hamburger :toggleClick="collapse" :isActive="$store.state.app.collapse"></Hamburger>
     </span>
     <!-- 导航菜单 -->
     <span class="nav-bar">
