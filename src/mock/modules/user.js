@@ -1,7 +1,6 @@
 // 获取用户信息
-export function getUser () {
+export function getUser() {
   return {
-    // isOpen: false,
     url: 'http://localhost:8080/user',
     type: 'get',
     data: {

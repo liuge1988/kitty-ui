@@ -3,12 +3,13 @@ import vuex from 'vuex'
 
 Vue.use(vuex);
 
-import AppStore from './modules/AppStore.js';
+import app from './modules/Application.js';
+import Menu from './modules/Menu.js';
 
 const store = new vuex.Store({
     modules: {
-        app: AppStore
-        // 其他
+        app: app,
+        menu: Menu
     }
 })
 

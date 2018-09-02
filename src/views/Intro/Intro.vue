@@ -12,8 +12,11 @@
 </template>
 
 <script>
+  import api from "@/http";
   export default {
     components:{
+    },
+    methods :{
     }
   }
 </script>
