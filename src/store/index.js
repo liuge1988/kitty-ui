@@ -3,13 +3,13 @@ import vuex from 'vuex'
 
 Vue.use(vuex);
 
-import app from './modules/Application.js';
-import Menu from './modules/Menu.js';
+import app from './modules/app'
+import menu from './modules/menu'
 
 const store = new vuex.Store({
     modules: {
         app: app,
-        menu: Menu
+        menu: menu
     }
 })
 
