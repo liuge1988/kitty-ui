@@ -6,6 +6,7 @@
         <p class="not-found-desc">这是系统介绍页面 ...</p>
         <el-button @click="$router.go(-1)">返回上一页</el-button>
         <i class="fa fa-home fa-lg"></i>
+        <i class="kt-icon-baoguo_shouna_o"></i>
         <el-button type="primary" class="not-found-btn-gohome" @click="$router.push('/')">进入首页</el-button>
       </div>
     </div>
