@@ -4,9 +4,10 @@ import axios from '../axios'
  * 菜单管理模块
  */
 
-export const findMenuTree = () => {
+export const findNavTree = (params) => {
     return axios({
-        url: '/menu/findTree',
-        method: 'get'
+        url: '/menu/findNavTree',
+        method: 'get',
+        params
     })
 }

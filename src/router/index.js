@@ -64,7 +64,7 @@ function addDynamicMenuAndRoutes() {
     console.log('动态菜单和路由已经存在.')
     return
   }
-  api.menu.findMenuTree()
+  api.menu.findNavTree({'userName':''})
   .then( (res) => {
     // 添加动态路由
     let dynamicRoutes = addDynamicRoutes(res.data)
