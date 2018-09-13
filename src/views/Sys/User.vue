@@ -4,7 +4,7 @@
 	<div class="toolbar" style="float:left; padding:18px;">
 		<el-form :inline="true" :model="filters" size="small">
 			<el-form-item>
-				<el-input v-model="filters.name" placeholder="姓名"></el-input>
+				<el-input v-model="filters.name" placeholder="用户名"></el-input>
 			</el-form-item>
 			<el-form-item>
 				<el-button type="primary" v-on:click="findUsers">查询</el-button>
@@ -18,8 +18,8 @@
 	<el-table :data="users" stripe highlight-current-row v-loading="dataLoading" @selection-change="selectionChange" 
 		style="width:100%;" max-height="420" size="mini" align="left">
 		<el-table-column type="selection" width="40"></el-table-column>
-		<el-table-column prop="userId" label="ID" min-width="40" sortable></el-table-column>
-		<el-table-column prop="userName" label="姓名" min-width="120" sortable></el-table-column>
+		<el-table-column prop="id" label="ID" min-width="40" sortable></el-table-column>
+		<el-table-column prop="name" label="用户名" min-width="120" sortable></el-table-column>
 		<el-table-column prop="deptName" label="机构" min-width="120" sortable></el-table-column>
 		<el-table-column prop="email" label="邮箱" min-width="120" sortable></el-table-column>
 		<el-table-column prop="mobile" label="手机" min-width="120" sortable></el-table-column>
@@ -40,18 +40,21 @@
 	<!--新增编辑界面-->
 	<el-dialog :title="operation?'新增':'编辑'" width="40%" :visible.sync="editDialogVisible" :close-on-click-modal="false">
 		<el-form :model="dataForm" label-width="80px" :rules="dataFormRules" ref="dataForm">
-			<el-form-item label="ID" prop="userId">
-				<el-input v-model="dataForm.userId" :disabled="true" auto-complete="off"></el-input>
+			<el-form-item label="ID" prop="id">
+				<el-input v-model="dataForm.id" :disabled="true" auto-complete="off"></el-input>
 			</el-form-item>
-			<el-form-item label="姓名" prop="userName">
-				<el-input v-model="dataForm.userName" auto-complete="off"></el-input>
+			<el-form-item label="用户名" prop="name">
+				<el-input v-model="dataForm.name" auto-complete="off"></el-input>
+			</el-form-item>
+			<el-form-item label="密码" prop="password">
+				<el-input v-model="dataForm.password" type="password" auto-complete="off"></el-input>
 			</el-form-item>
 			<el-form-item label="机构" prop="deptName">
 				<popup-tree-input 
 					:data="deptData" 
 					:props="deptTreeProps" 
 					:prop="dataForm.deptName" 
-					:nodeKey="dataForm.deptId" 
+					:nodeKey="''+dataForm.deptId" 
 					:currentChangeHandle="deptTreeCurrentChangeHandle">
 				</popup-tree-input>
 			</el-form-item>
@@ -93,13 +96,13 @@ export default {
 			editLoading: false,
 			dataFormRules: {
 				name: [
-					{ required: true, message: '请输入姓名', trigger: 'blur' }
+					{ required: true, message: '请输入用户名', trigger: 'blur' }
 				]
 			},
 			// 新增编辑界面数据
 			dataForm: {
-				userId: 0,
-				userName: '',
+				id: 0,
+				name: '',
 				password: '123456',
 				deptId: 1,
 				deptName: '',
@@ -126,7 +129,7 @@ export default {
 			let params = {
 				pageNum: this.pageNum,
 				pageSize: this.pageSize,
-				// columnFilters:{userName: {name:'userName', value:this.filters.name}}
+				// columnFilters:{name: {name:'name', value:this.filters.name}}
 			}
 			this.$api.user.findPage(params).then((res) => {
 				this.totalSize = res.data.totalSize
@@ -136,12 +139,12 @@ export default {
 		},
 		// 删除
 		handleDel: function (index, row) {
-			let ids = row.userId
+			let ids = row.id
 			this.delete(ids)
 		},
 		// 批量删除
 		batchDelete: function () {
-			let ids = this.selections.map(item => item.userId).toString()
+			let ids = this.selections.map(item => item.id).toString()
 			this.delete(ids)
 		},
 		// 删除操作
@@ -153,7 +156,7 @@ export default {
 				let params = []
 				let idArray = (ids+'').split(',')
 				for(var i=0; i<idArray.length; i++) {
-					params.push({'userId':idArray[i]})
+					params.push({'id':idArray[i]})
 				}
 				this.$api.user.batchDelete(params).then((res) => {
 					this.dataLoading = false
@@ -171,8 +174,8 @@ export default {
 			this.editDialogVisible = true
 			this.operation = true
 			this.dataForm = {
-				userId: 0,
-				userName: '',
+				id: 0,
+				name: '',
 				password: '',
 				deptId: 1,
 				deptName: '',
@@ -219,7 +222,7 @@ export default {
 		},
 		// 菜单树选中
       	deptTreeCurrentChangeHandle (data, node) {
-        	this.dataForm.deptId = data.deptId
+        	this.dataForm.deptId = data.id
         	this.dataForm.deptName = data.name
       	}
 	},

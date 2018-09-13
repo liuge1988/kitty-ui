@@ -8,7 +8,7 @@
     <el-menu default-active="1" :class="collapse?'menu-bar-collapse-width':'menu-bar-width'"
       :collapse="collapse" @open="handleopen" @close="handleclose" @select="handleselect">
       <!-- 导航菜单树组件，动态加载菜单 -->
-      <menu-tree v-for="item in menuTree" :key="item.menuId" :menu="item"></menu-tree>
+      <menu-tree v-for="item in menuTree" :key="item.id" :menu="item"></menu-tree>
     </el-menu>
 	</div>
 </template>

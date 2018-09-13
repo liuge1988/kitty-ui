@@ -35,9 +35,9 @@ let findTreeData = {
 let content = []
 for(let i=0; i<3; i++) {
   let obj = {}
-  obj.deptId   = i + 1
+  obj.id   = i + 1
   obj.parentId   = 0
-  obj.name = 'dept  ' + obj.deptId
+  obj.name = 'dept  ' + obj.id
   obj.children = []
   content.push(obj)
 }
@@ -45,9 +45,9 @@ for(let i=0; i<content.length; i++) {
   let parent = content[i]
   for(let i=0; i<5; i++) {
     let obj = {}
-    obj.deptId   = i + 1 + (i * parent.deptId)
-    obj.parentId   = parent.deptId
-    obj.name = 'dept  ' + obj.deptId
+    obj.id   = i + 1 + (i * parent.id)
+    obj.parentId   = parent.id
+    obj.name = 'dept  ' + obj.id
     parent.children.push(obj)
   }
 }
