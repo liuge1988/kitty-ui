@@ -10,27 +10,27 @@ import { hasPermission } from '@/permission/index.js'
 export default {
   name: 'KtButton',
   props: {
-    label: {
+    label: {  // 按钮显示文本
       type: String,
       default: 'Button'
     },
-    size: {
+    size: {  // 按钮尺寸
       type: String,
       default: 'mini'
     },
-    type: {
+    type: {  // 按钮类型
       type: String,
       default: null
     },
-    loading: {
+    loading: {  // 按钮加载标识
       type: Boolean,
       default: false
     },
-    disabled: {
+    disabled: {  // 按钮是否禁用
       type: Boolean,
       default: false
     },
-    perms: {
+    perms: {  // 按钮权限标识，外部使用者传入
       type: String,
       default: null
     }
@@ -41,10 +41,12 @@ export default {
   },
   methods: {
     handleClick: function () {
-       this.$emit('click', {})
+      // 按钮操作处理函数
+      this.$emit('click', {})
     }, 
     hasPerms: function (perms) {
-       return hasPermission(perms) & !this.disabled
+      // 根据权限标识和外部指示状态进行权限判断
+      return hasPermission(perms) & !this.disabled
     }
   },
   mounted() {

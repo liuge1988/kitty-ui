@@ -48,7 +48,7 @@ export default {
     },
     maxHeight: {  // 表格最大高度
       type: Number,
-      default: 420
+      default: 400
     }
   },
   data() {

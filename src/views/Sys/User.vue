@@ -1,8 +1,8 @@
 <template>
-  <div class="container" style="width:100%;">
+  <div class="container" style="width:99%;margin-top:-25px;">
 	<!--工具栏-->
-	<div class="toolbar" style="float:left; padding:18px;">
-		<el-form :inline="true" :model="filters" size="small">
+	<div class="toolbar" style="float:left;padding-top:10px;padding-left:15px;">
+		<el-form :inline="true" :model="filters" :size="size">
 			<el-form-item>
 				<el-input v-model="filters.name" placeholder="用户名"></el-input>
 			</el-form-item>
@@ -10,18 +10,18 @@
 				<el-button type="primary" v-on:click="findPage(null)">查询</el-button>
 			</el-form-item>
 			<el-form-item>
-				<kt-button label="新增" perms="sys:user:add2" type="primary" @click="handleAdd" />
+				<kt-button label="新增" perms="sys:user:add" type="primary" @click="handleAdd" />
 			</el-form-item>
 		</el-form>
 	</div>
 	<!--表格内容栏-->
-	<kt-table permsEdit="sys:user:edit" permsDelete="sys:user:delete2"
+	<kt-table permsEdit="sys:user:edit" permsDelete="sys:user:delete"
 		:data="pageResult" :columns="columns" 
 		@findPage="findPage" @handleEdit="handleEdit" @handleDelete="handleDelete">
 	</kt-table>
 	<!--新增编辑界面-->
 	<el-dialog :title="operation?'新增':'编辑'" width="40%" :visible.sync="editDialogVisible" :close-on-click-modal="false">
-		<el-form :model="dataForm" label-width="80px" :rules="dataFormRules" ref="dataForm">
+		<el-form :model="dataForm" label-width="80px" :rules="dataFormRules" ref="dataForm" :size="size">
 			<el-form-item label="ID" prop="id">
 				<el-input v-model="dataForm.id" :disabled="true" auto-complete="off"></el-input>
 			</el-form-item>
@@ -48,8 +48,8 @@
 			</el-form-item>
 		</el-form>
 		<div slot="footer" class="dialog-footer">
-			<el-button @click.native="editDialogVisible = false">取消</el-button>
-			<el-button type="primary" @click.native="editSubmit" :loading="editLoading">提交</el-button>
+			<el-button :size="size" @click.native="editDialogVisible = false">取消</el-button>
+			<el-button :size="size" type="primary" @click.native="editSubmit" :loading="editLoading">提交</el-button>
 		</div>
 	</el-dialog>
   </div>
@@ -67,6 +67,7 @@ export default {
 	},
 	data() {
 		return {
+			size: 'small',
 			filters: {
 				name: ''
 			},

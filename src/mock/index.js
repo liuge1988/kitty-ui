@@ -7,8 +7,8 @@ import * as menu from './modules/menu'
 // 1. 开启/关闭[所有模块]拦截, 通过调[openMock参数]设置.
 // 2. 开启/关闭[业务模块]拦截, 通过调用fnCreate方法[isOpen参数]设置.
 // 3. 开启/关闭[业务模块中某个请求]拦截, 通过函数返回对象中的[isOpen属性]设置.
-// let openMock = true
-let openMock = false
+let openMock = true
+// let openMock = false
 fnCreate(login, openMock)
 fnCreate(user, openMock)
 fnCreate(dept, openMock)
@@ -26,7 +26,7 @@ function fnCreate (mod, isOpen = true) {
         if (res.isOpen !== false) {
           let baseUrl = 'http://localhost:8088/'
           let url = baseUrl + res.url
-          Mock.mock(new RegExp(baseUrl), res.type, (opts) => {
+          Mock.mock(new RegExp(url), res.type, (opts) => {
             opts['data'] = opts.body ? JSON.parse(opts.body) : null
             delete opts.body
             console.log('\n')

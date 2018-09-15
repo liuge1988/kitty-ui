@@ -20,11 +20,8 @@ export default {
 .container {
   position: absolute;
   top: 60px;
-  right: 0px;
-  border-color: rgba(148, 145, 147, 0.2);
-  border-left-width: 1px;
-  border-left-style: solid;
-  // background: rgba(211, 71, 113, 0.1);
+  left: 0px;
+  // background: rgba(202, 243, 227, 0.1);
   .breadcrumb {
     padding: 10px;
     border-color: rgba(148, 145, 147, 0.2);
@@ -32,10 +29,10 @@ export default {
     border-bottom-style: solid;
   }
   .content {
-    margin-top: -25px;
     margin-bottom: 5px;
     padding-top: 5px;
-    // background: rgba(86, 37, 126, 0.1);
+    margin-left: 2px;
+    // background: rgba(209, 212, 212, 0.1);
   }
 }
 .menu-bar-width {
