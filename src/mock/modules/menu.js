@@ -1,5 +1,5 @@
 // 获取菜单树
-const menuTreeData = {
+const naveTreeData = {
   "code": 200,
   "msg": null,
   "data": [
@@ -220,6 +220,6 @@ export function findTree() {
   return {
     url: 'menu/findTree',
     type: 'get',
-    data: menuTreeData
+    data: naveTreeData
   }
 }

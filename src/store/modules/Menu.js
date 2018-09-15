@@ -1,13 +1,13 @@
 export default {
     state: {
-        menuTree: [],  // 菜单树
+        navTree: [],  // 导航菜单树
     },
     getters: {
    
     },
     mutations: {
-        setMenuTree(state, menuTree){  // 设置菜单树
-            state.menuTree = menuTree;
+        setNavTree(state, navTree){  // 设置导航菜单树
+            state.navTree = navTree;
         }
     },
     actions: {
