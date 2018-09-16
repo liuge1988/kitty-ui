@@ -4,18 +4,18 @@
 	<div class="toolbar" style="float:left;padding-top:10px;padding-left:15px;">
 		<el-form :inline="true" :model="filters" :size="size">
 			<el-form-item>
-				<el-input v-model="filters.name" placeholder="用户名"></el-input>
+				<el-input v-model="filters.label" placeholder="名称"></el-input>
 			</el-form-item>
 			<el-form-item>
 				<el-button type="primary" v-on:click="findPage(null)">查询</el-button>
 			</el-form-item>
 			<el-form-item>
-				<kt-button label="新增" perms="sys:user:add" type="primary" @click="handleAdd" />
+				<kt-button label="新增" perms="sys:dict:add" type="primary" @click="handleAdd" />
 			</el-form-item>
 		</el-form>
 	</div>
 	<!--表格内容栏-->
-	<kt-table permsEdit="sys:user:edit" permsDelete="sys:user:delete"
+	<kt-table permsEdit="sys:dict:edit" permsDelete="sys:dict:delete"
 		:data="pageResult" :columns="columns" 
 		@findPage="findPage" @handleEdit="handleEdit" @handleDelete="handleDelete">
 	</kt-table>
@@ -25,26 +25,23 @@
 			<el-form-item label="ID" prop="id">
 				<el-input v-model="dataForm.id" :disabled="true" auto-complete="off"></el-input>
 			</el-form-item>
-			<el-form-item label="用户名" prop="name">
-				<el-input v-model="dataForm.name" auto-complete="off"></el-input>
+			<el-form-item label="名称" prop="label">
+				<el-input v-model="dataForm.label" auto-complete="off"></el-input>
 			</el-form-item>
-			<el-form-item label="密码" prop="password">
-				<el-input v-model="dataForm.password" type="password" auto-complete="off"></el-input>
+			<el-form-item label="值" prop="value">
+				<el-input v-model="dataForm.value" auto-complete="off"></el-input>
 			</el-form-item>
-			<el-form-item label="机构" prop="deptName">
-				<popup-tree-input 
-					:data="deptData" 
-					:props="deptTreeProps" 
-					:prop="dataForm.deptName" 
-					:nodeKey="''+dataForm.deptId" 
-					:currentChangeHandle="deptTreeCurrentChangeHandle">
-				</popup-tree-input>
+			<el-form-item label="类型" prop="type">
+				<el-input v-model="dataForm.type" auto-complete="off"></el-input>
 			</el-form-item>
-			<el-form-item label="邮箱" prop="email">
-				<el-input v-model="dataForm.email" auto-complete="off"></el-input>
+			<el-form-item label="排序" prop="sort">
+				<el-input v-model="dataForm.sort" auto-complete="off"></el-input>
 			</el-form-item>
-			<el-form-item label="手机" prop="mobile">
-				<el-input v-model="dataForm.mobile" auto-complete="off"></el-input>
+			<el-form-item label="描述 " prop="description">
+				<el-input v-model="dataForm.description" auto-complete="off" type="textarea"></el-input>
+			</el-form-item>
+			<el-form-item label="备注" prop="remarks">
+				<el-input v-model="dataForm.remarks" auto-complete="off" type="textarea"></el-input>
 			</el-form-item>
 		</el-form>
 		<div slot="footer" class="dialog-footer">
@@ -56,12 +53,10 @@
 </template>
 
 <script>
-import PopupTreeInput from "@/components/PopupTreeInput"
 import KtTable from "@/views/Core/KtTable"
 import KtButton from "@/views/Core/KtButton"
 export default {
 	components:{
-			PopupTreeInput,
 			KtTable,
 			KtButton
 	},
@@ -69,16 +64,17 @@ export default {
 		return {
 			size: 'small',
 			filters: {
-				name: ''
+				label: ''
 			},
 			columns: [
 				{prop:"id", label:"ID", minWidth:50},
-				{prop:"name", label:"用户名", minWidth:120},
-				{prop:"deptName", label:"机构", minWidth:120},
-				{prop:"email", label:"邮箱", minWidth:120},
-				{prop:"mobile", label:"手机", minWidth:100},
-				{prop:"status", label:"状态", minWidth:60},
-				{prop:"createBy", label:"创建人", minWidth:120},
+				{prop:"label", label:"名称", minWidth:100},
+				{prop:"value", label:"值", minWidth:100},
+				{prop:"type", label:"类型", minWidth:80},
+				{prop:"sort", label:"排序", minWidth:80},
+				{prop:"description", label:"描述", minWidth:120},
+				{prop:"remarks", label:"备注", minWidth:120},
+				{prop:"createBy", label:"创建人", minWidth:100},
 				{prop:"createTime", label:"创建时间", minWidth:190}
 				// {prop:"lastUpdateBy", label:"更新人", minWidth:100},
 				// {prop:"lastUpdateTime", label:"更新时间", minWidth:120}
@@ -90,25 +86,19 @@ export default {
 			editDialogVisible: false, // 新增编辑界面是否显示
 			editLoading: false,
 			dataFormRules: {
-				name: [
-					{ required: true, message: '请输入用户名', trigger: 'blur' }
+				label: [
+					{ required: true, message: '请输入名称', trigger: 'blur' }
 				]
 			},
 			// 新增编辑界面数据
 			dataForm: {
 				id: 0,
-				name: '',
-				password: '123456',
-				deptId: 1,
-				deptName: '',
-				email: 'test@qq.com',
-				mobile: '13889700023',
-				status: 1
-			},
-			deptData: [],
-			deptTreeProps: {
-				label: 'name',
-				children: 'children'
+				label: '',
+				value: '',
+				type: '',
+				sort: 0,
+				description: '',
+				remarks: ''
 			}
 		}
 	},
@@ -118,14 +108,14 @@ export default {
 			if(data !== null) {
 				this.pageRequest = data.pageRequest
 			}
-			this.pageRequest.columnFilters = {name: {name:'name', value:this.filters.name}}
-			this.$api.user.findPage(this.pageRequest).then((res) => {
+			this.pageRequest.columnFilters = {label: {name:'label', value:this.filters.label}}
+			this.$api.dict.findPage(this.pageRequest).then((res) => {
 				this.pageResult = res.data
 			})
 		},
 		// 批量删除
 		handleDelete: function (data) {
-			this.$api.user.batchDelete(data.params).then(data.callback)
+			this.$api.dict.batchDelete(data.params).then(data.callback)
 		},
 		// 显示新增界面
 		handleAdd: function () {
@@ -133,13 +123,12 @@ export default {
 			this.operation = true
 			this.dataForm = {
 				id: 0,
-				name: '',
-				password: '',
-				deptId: 1,
-				deptName: '',
-				email: 'test@qq.com',
-				mobile: '13889700023',
-				status: 1
+				label: '',
+				value: '',
+				type: '',
+				sort: 0,
+				description: 'desc',
+				remarks: 'remark'
 			}
 		},
 		// 显示编辑界面
@@ -155,7 +144,7 @@ export default {
 					this.$confirm('确认提交吗？', '提示', {}).then(() => {
 						this.editLoading = true
 						let params = Object.assign({}, this.dataForm)
-						this.$api.user.save(params).then((res) => {
+						this.$api.dict.save(params).then((res) => {
 							this.editLoading = false
 							this.$message({ message: '提交成功', type: 'success' })
 							this.$refs['dataForm'].resetFields()
@@ -165,21 +154,9 @@ export default {
 					})
 				}
 			})
-		},
-		// 获取部门列表
-		findDeptTree: function () {
-			this.$api.dept.findDeptTree().then((res) => {
-				this.deptData = res.data
-			})
-		},
-		// 菜单树选中
-      	deptTreeCurrentChangeHandle (data, node) {
-        	this.dataForm.deptId = data.id
-        	this.dataForm.deptName = data.name
-      	}
+		}
 	},
 	mounted() {
-		this.findDeptTree()
 	}
 }
 </script>

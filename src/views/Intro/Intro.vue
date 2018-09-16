@@ -95,7 +95,7 @@
   }
   .carousel-item-intro ul {
     color: #ffffff;
-    font-size: 15px;
+    font-size: 14px;
     opacity: 1.75;
     line-height: 65px;
     margin: 0;
