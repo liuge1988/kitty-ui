@@ -7,7 +7,7 @@
 				<el-input v-model="filters.name" placeholder="用户名"></el-input>
 			</el-form-item>
 			<el-form-item>
-				<kt-button label="查询" perms="sys:log:view" type="primary" @click="findMenuTree(null)"/>
+				<kt-button label="查询" perms="sys:log:view" type="primary" @click="findPage(null)"/>
 			</el-form-item>
 		</el-form>
 	</div>
@@ -20,9 +20,11 @@
 
 <script>
 import KtTable from "@/views/Core/KtTable"
+import KtButton from "@/views/Core/KtButton"
 export default {
-	components:{
-			KtTable
+	components: {
+		KtTable,
+		KtButton
 	},
 	data() {
 		return {

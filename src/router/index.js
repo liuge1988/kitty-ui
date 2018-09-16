@@ -4,6 +4,7 @@ import Login from '@/views/Login'
 import NotFound from '@/views/Error/404'
 import Home from '@/views/Home'
 import Intro from '@/views/Intro/Intro'
+import Druid from '@/views/Druid/Druid'
 import api from '@/http/api'
 import store from '@/store'
 import { isURL } from '@/utils/validate'
@@ -17,15 +18,24 @@ const router = new Router({
       name: '首页',
       component: Home,
       children: [
-        { path: '', component: Intro, name: '系统介绍' }
+        { 
+          path: '', 
+          name: '系统介绍', 
+          component: Intro 
+        },
+        {
+          path: '/druid/sql',
+          name: 'SQL监控',
+          component: Druid
+        },
       ]
     },
     {
       path: '/login',
       name: '登录',
       component: Login
-    }
-    ,{
+    },
+    {
       path: '/404',
       name: 'notFound',
       component: NotFound
@@ -103,7 +113,7 @@ function addDynamicRoutes (menuList = [], routes = []) {
        component: null,
        name: menuList[i].name,
        meta: {
-         menuId: menuList[i].menuId,
+         id: menuList[i].id,
          title: menuList[i].name,
          isDynamic: true,
          isTab: true,
