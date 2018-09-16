@@ -7,15 +7,15 @@
 				<el-input v-model="filters.name" placeholder="用户名"></el-input>
 			</el-form-item>
 			<el-form-item>
-				<el-button type="primary" v-on:click="findPage(null)">查询</el-button>
+				<kt-button label="查询" perms="sys:role:view" type="primary" @click="findMenuTree(null)"/>
 			</el-form-item>
 			<el-form-item>
-				<kt-button label="新增" perms="sys:dept:add" type="primary" @click="handleAdd" />
+				<kt-button label="新增" perms="sys:role:add" type="primary" @click="handleAdd" />
 			</el-form-item>
 		</el-form>
 	</div>
 	<!--表格内容栏-->
-	<kt-table permsEdit="sys:dept:edit" permsDelete="sys:dept:delete"
+	<kt-table permsEdit="sys:role:edit" permsDelete="sys:role:delete"
 		:data="pageResult" :columns="columns" 
 		@findPage="findPage" @handleEdit="handleEdit" @handleDelete="handleDelete">
 	</kt-table>

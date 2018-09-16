@@ -7,7 +7,7 @@
         node-key="nodeKey"
         ref="popupTree"
         @current-change="currentChangeHandle"
-        :default-expand-all="true"
+        :default-expand-all="defaultExpandAll"
         :highlight-current="true"
         :expand-on-click-node="true">
       </el-tree>
@@ -43,6 +43,10 @@ export default {
     placement: {
       type: String,
       default: 'right-start'
+    },
+    defaultExpandAll: {
+      type: Boolean,
+      default: false
     },
     currentChangeHandle: {
       type: Function,

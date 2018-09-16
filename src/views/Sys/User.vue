@@ -61,9 +61,9 @@ import KtTable from "@/views/Core/KtTable"
 import KtButton from "@/views/Core/KtButton"
 export default {
 	components:{
-			PopupTreeInput,
-			KtTable,
-			KtButton
+		PopupTreeInput,
+		KtTable,
+		KtButton
 	},
 	data() {
 		return {
