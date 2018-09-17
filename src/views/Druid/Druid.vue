@@ -1,13 +1,26 @@
 <template>
   <div class="iframe-container">
-    <iframe src="http://localhost:8088/druid/login.html" 
-      scrolling="auto" frameborder="0" class="frame">
+    <iframe :src="src" scrolling="auto" frameborder="0" class="frame">
     </iframe>
   </div>
 </template>
 
 <script>
   export default {
+    data() {
+      return {
+        src: ''
+      }
+    },
+    methods: {
+      // 获取路径
+      getSrc: function (url) {
+        return this.global.baseURL + url
+      }
+    },
+    mounted() {
+      this.src = this.getSrc("druid/login.html")
+    }
   }
 </script>
 

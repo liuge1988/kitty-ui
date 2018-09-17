@@ -57,7 +57,7 @@
       </el-table-column>
     </el-table>
     <!-- 新增修改界面 -->
-    <el-dialog :title="!dataForm.id ? '新增' : '修改'" :visible.sync="dialogVisible" :close-on-click-modal="false">
+    <el-dialog :title="!dataForm.id ? '新增' : '修改'" width="40%" :visible.sync="dialogVisible" :close-on-click-modal="false">
       <el-form :model="dataForm" :rules="dataRule" ref="dataForm" @keyup.enter.native="dataFormSubmit()" 
         label-width="80px" :size="size" style="text-align:left;">
         <el-form-item label="菜单类型" prop="type">

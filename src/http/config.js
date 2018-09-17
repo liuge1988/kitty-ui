@@ -1,7 +1,10 @@
+
+import * as global from '@/utils/global'
+
 export default {
   method: 'get',
   // 基础url前缀
-  baseURL: 'http://localhost:8088/',
+  baseURL: global.baseURL,
   // 请求头信息
   headers: {
     'Content-Type': 'application/json;charset=UTF-8'
