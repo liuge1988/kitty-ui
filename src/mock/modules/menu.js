@@ -19,7 +19,7 @@ export function findNavTree() {
         "url": null,
         "perms": null,
         "type": 0,
-        "icon": "fa el-icon-setting",
+        "icon": "el-icon-setting",
         "orderNum": 0,
         "delFlag": 0,
         "parentName": null,
@@ -105,7 +105,7 @@ export function findNavTree() {
             "lastUpdateTime": null,
             "parentId": 1,
             "name": "SQL监控",
-            "url": "/druid/sql",
+            "url": "iframe:/druid/login.html",
             "perms": null,
             "type": 1,
             "icon": "el-icon-info",
@@ -262,6 +262,24 @@ export function findNavTree() {
             "children": []
           }
         ]
+      },
+      {
+        "id": 35,
+        "createBy": null,
+        "createTime": null,
+        "lastUpdateBy": null,
+        "lastUpdateTime": null,
+        "parentId": 0,
+        "name": "接口文档",
+        "url": "iframe:/swagger-ui.html",
+        "perms": "",
+        "type": 1,
+        "icon": "el-icon-tickets",
+        "orderNum": 7,
+        "delFlag": 0,
+        "parentName": "",
+        "level": 0,
+        "children": []
       }
     ]
   }
@@ -289,7 +307,7 @@ export function findMenuTree() {
         "url": null,
         "perms": null,
         "type": 0,
-        "icon": "fa el-icon-setting",
+        "icon": "el-icon-setting",
         "orderNum": 0,
         "delFlag": 0,
         "parentName": null,
@@ -897,6 +915,24 @@ export function findMenuTree() {
             "children": []
           }
         ]
+      },
+      {
+        "id": 35,
+        "createBy": null,
+        "createTime": null,
+        "lastUpdateBy": null,
+        "lastUpdateTime": null,
+        "parentId": 0,
+        "name": "接口文档",
+        "url": "iframe:/swagger-ui.html",
+        "perms": "",
+        "type": 1,
+        "icon": "el-icon-tickets",
+        "orderNum": 7,
+        "delFlag": 0,
+        "parentName": "",
+        "level": 0,
+        "children": []
       }
     ]
   }

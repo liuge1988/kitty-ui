@@ -1,5 +1,5 @@
 import Mock from 'mockjs'
-import * as global from '@/utils/global'
+import { baseUrl } from '@/utils/global'
 import * as login from './modules/login'
 import * as user from './modules/user'
 import * as role from './modules/role'
@@ -8,7 +8,6 @@ import * as menu from './modules/menu'
 import * as dict from './modules/dict'
 import * as log from './modules/log'
 
-let baseUrl = global.baseURL
 // 1. 开启/关闭[所有模块]拦截, 通过调[openMock参数]设置.
 // 2. 开启/关闭[业务模块]拦截, 通过调用fnCreate方法[isOpen参数]设置.
 // 3. 开启/关闭[业务模块中某个请求]拦截, 通过函数返回对象中的[isOpen属性]设置.
