@@ -4,7 +4,8 @@
         "login": "登录",
         "logout": "退出",
         "doc": "文档",
-        "msgCenter": "消息中心",
+        "blog": "博客",
+        "projectRepo": "项目",
         "myMsg": "我的消息",
         "config": "配置",           
         "exit": "退出"
