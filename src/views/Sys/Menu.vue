@@ -7,7 +7,7 @@
 				<el-input v-model="filters.name" placeholder="名称"></el-input>
 			</el-form-item>
 			<el-form-item>
-				<kt-button label="查询" perms="sys:menu:view" type="primary" @click="findMenuTree(null)"/>
+				<kt-button label="查询" perms="sys:menu:view" type="primary" @click="findTreeData(null)"/>
 			</el-form-item>
 			<el-form-item>
 				<kt-button label="新增" perms="sys:menu:add" type="primary" @click="handleAdd"/>
@@ -15,8 +15,8 @@
 		</el-form>
 	</div>
 	<!--表格树内容栏-->
-    <el-table :data="dataList" stripe size="mini" style="width: 100%;"
-      v-loading="loading" element-loading-text="拼命加载中" >
+    <el-table :data="tableTreeDdata" stripe size="mini" style="width: 100%;"
+      v-loading="loading" element-loading-text="拼命加载中">
       <el-table-column
         prop="id" header-align="center" align="center" width="80" label="ID">
       </el-table-column>
@@ -59,7 +59,7 @@
     </el-table>
     <!-- 新增修改界面 -->
     <el-dialog :title="!dataForm.id ? '新增' : '修改'" width="40%" :visible.sync="dialogVisible" :close-on-click-modal="false">
-      <el-form :model="dataForm" :rules="dataRule" ref="dataForm" @keyup.enter.native="dataFormSubmit()" 
+      <el-form :model="dataForm" :rules="dataRule" ref="dataForm" @keyup.enter.native="submitForm()" 
         label-width="80px" :size="size" style="text-align:left;">
         <el-form-item label="菜单类型" prop="type">
           <el-radio-group v-model="dataForm.type">
@@ -71,8 +71,8 @@
         </el-form-item>
         <el-form-item label="上级菜单" prop="parentName">
             <popup-tree-input 
-              :data="menuTree" :props="menuTreeProps" :prop="dataForm.parentName" 
-              :nodeKey="''+dataForm.parentId" :currentChangeHandle="handleMenuTreeChange">
+              :data="popupTreeData" :props="popupTreeProps" :prop="dataForm.parentName==null?'根节点':dataForm.parentName" 
+              :nodeKey="''+dataForm.parentId" :currentChangeHandle="handleTreeSelectChange">
             </popup-tree-input>
         </el-form-item>
         <el-form-item v-if="dataForm.type === 1" label="菜单路由" prop="url">
@@ -112,7 +112,7 @@
       </el-form>
       <span slot="footer" class="dialog-footer">
         <el-button :size="size"  @click="dialogVisible = false">取消</el-button>
-        <el-button :size="size"  type="primary" @click="dataFormSubmit()">确定</el-button>
+        <el-button :size="size"  type="primary" @click="submitForm()">确定</el-button>
       </span>
     </el-dialog>
   </div>
@@ -137,7 +137,7 @@ export default {
 			filters: {
 				name: ''
       },
-      dataList: [],
+      tableTreeDdata: [],
       dialogVisible: false,
       menuTypeList: ['目录', '菜单', '按钮'],
       dataForm: {
@@ -160,12 +160,8 @@ export default {
           { required: true, message: '上级菜单不能为空', trigger: 'change' }
         ]
       },
-      menuListTreeProps: {
-        label: 'name',
-        children: 'children'
-      },
-      menuTree: [],
-      menuTreeProps: {
+      popupTreeData: [],
+      popupTreeProps: {
 				label: 'name',
 				children: 'children'
 			}
@@ -173,20 +169,20 @@ export default {
 	},
 	methods: {
 		// 获取数据
-    findMenuTree: function () {
+    findTreeData: function () {
       this.loading = true
 			this.$api.menu.findMenuTree().then((res) => {
-        this.dataList = res.data
-        this.menuTree = this.getParentMenuTree(res.data)
+        this.tableTreeDdata = res.data
+        this.popupTreeData = this.getParentMenuTree(res.data)
         this.loading = false
 			})
     },
 		// 获取上级菜单树
-    getParentMenuTree: function (dataList) {
+    getParentMenuTree: function (tableTreeDdata) {
       let parent = {
         parentId: -1,
         name: '根节点',
-        children: dataList
+        children: tableTreeDdata
       }
       return [parent]
     },
@@ -219,48 +215,47 @@ export default {
       }).then(() => {
         let params = this.getDeleteIds([], row)
         this.$api.menu.batchDelete(params).then( res => {
-          this.findMenuTree()
+          this.findTreeData()
           this.$message({message: '删除成功', type: 'success'})
         })
       })
     },
     // 获取删除的包含子菜单的id列表
-    getDeleteIds (ids, menu) {
-      ids.push({id:menu.id})
-      if(menu.children != null) {
-        for(let i=0, len=menu.children.length; i<len; i++) {
-          this.getDeleteIds(ids, menu.children[i])
+    getDeleteIds (ids, row) {
+      ids.push({id:row.id})
+      if(row.children != null) {
+        for(let i=0, len=row.children.length; i<len; i++) {
+          this.getDeleteIds(ids, row.children[i])
         }
       }
       return ids
     },
       // 菜单树选中
-    handleMenuTreeChange (data, node) {
+    handleTreeSelectChange (data, node) {
       this.dataForm.parentId = data.id
       this.dataForm.parentName = data.name
-    },
-    // 菜单树设置当前选中节点
-    menuListTreeSetCurrentNode () {
-      this.$refs.menuListTree.setCurrentKey(this.dataForm.parentId)
-      this.dataForm.parentName = (this.$refs.menuListTree.getCurrentNode() || {})['name']
     },
     // 图标选中
     iconActiveHandle (iconName) {
       this.dataForm.icon = iconName
     },
     // 表单提交
-    dataFormSubmit () {
+    submitForm () {
       this.$refs['dataForm'].validate((valid) => {
         if (valid) {
 					this.$confirm('确认提交吗？', '提示', {}).then(() => {
 						this.editLoading = true
 						let params = Object.assign({}, this.dataForm)
 						this.$api.menu.save(params).then((res) => {
+              if(res.code == 200) {
+								this.$message({ message: '操作成功', type: 'success' })
+							} else {
+								this.$message({message: '操作失败, ' + res.msg, type: 'error'})
+							}
 							this.editLoading = false
-							this.$message({ message: '提交成功', type: 'success' })
 							this.$refs['dataForm'].resetFields()
 							this.dialogVisible = false
-							this.findMenuTree()
+							this.findTreeData()
 						})
 					})
 				}
@@ -268,7 +263,7 @@ export default {
     }
 	},
 	mounted() {
-    this.findMenuTree()
+    this.findTreeData()
 	}
 }
 </script>

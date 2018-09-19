@@ -110,8 +110,12 @@ export default {
         }
         this.loading = true
         let callback = res => {
-          this.$message({message: '删除成功', type: 'success'})
-          this.findPage()
+          if(res.code == 200) {
+            this.$message({message: '删除成功', type: 'success'})
+            this.findPage()
+          } else {
+            this.$message({message: '操作失败, ' + res.msg, type: 'error'})
+          }
           this.loading = false
         }
         this.$emit('handleDelete', {params:params, callback:callback})

@@ -49,7 +49,7 @@
 		</el-form>
 		<div slot="footer" class="dialog-footer">
 			<el-button :size="size" @click.native="editDialogVisible = false">取消</el-button>
-			<el-button :size="size" type="primary" @click.native="editSubmit" :loading="editLoading">提交</el-button>
+			<el-button :size="size" type="primary" @click.native="submitForm" :loading="editLoading">提交</el-button>
 		</div>
 	</el-dialog>
   </div>
@@ -149,15 +149,19 @@ export default {
 			this.dataForm = Object.assign({}, params.row)
 		},
 		// 编辑
-		editSubmit: function () {
+		submitForm: function () {
 			this.$refs.dataForm.validate((valid) => {
 				if (valid) {
 					this.$confirm('确认提交吗？', '提示', {}).then(() => {
 						this.editLoading = true
 						let params = Object.assign({}, this.dataForm)
 						this.$api.user.save(params).then((res) => {
+							if(res.code == 200) {
+								this.$message({ message: '操作成功', type: 'success' })
+							} else {
+								this.$message({message: '操作失败, ' + res.msg, type: 'error'})
+							}
 							this.editLoading = false
-							this.$message({ message: '提交成功', type: 'success' })
 							this.$refs['dataForm'].resetFields()
 							this.editDialogVisible = false
 							this.findPage(null)
