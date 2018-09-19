@@ -16,7 +16,7 @@
     <!-- <el-checkbox v-model="checked" checked class="remember">记住密码</el-checkbox> -->
     <el-form-item style="width:100%;">
       <el-button type="primary" style="width:48%;" @click.native.prevent="reset">重 置</el-button>
-      <el-button type="primary" style="width:48%;" @click.native.prevent="login" :loading="logining">登 录</el-button>
+      <el-button type="primary" style="width:48%;" @click.native.prevent="login" :loading="loading">登 录</el-button>
     </el-form-item>
   </el-form>
 </template>
@@ -34,7 +34,7 @@ export default {
   },
   data() {
     return {
-      logining: false,
+      loading: false,
       loginForm: {
         account: 'admin',
         password: 'admin'
@@ -52,6 +52,7 @@ export default {
   },
   methods: {
     login() {
+      this.loading = true
       let userInfo = {account:this.loginForm.account, password:this.loginForm.password}
       this.$api.login.login(userInfo).then((res) => {
           if(res.msg != null) {
@@ -65,6 +66,7 @@ export default {
             this.$store.commit('menuRouteLoaded', false) // 要求重新加载导航菜单
             this.$router.push('/')  // 登录成功，跳转到主页
           }
+          this.loading = false
         }).catch((res) => {
           this.$message({
           message: res.message,

@@ -59,7 +59,7 @@ export default {
 			this.pageRequest.columnFilters = {userName: {name:'userName', value:this.filters.name}}
 			this.$api.log.findPage(this.pageRequest).then((res) => {
 				this.pageResult = res.data
-			})
+			}).then(data.callback)
 		}
 	},
 	mounted() {

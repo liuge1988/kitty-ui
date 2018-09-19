@@ -111,7 +111,7 @@ export default {
 			this.pageRequest.columnFilters = {label: {name:'label', value:this.filters.label}}
 			this.$api.dict.findPage(this.pageRequest).then((res) => {
 				this.pageResult = res.data
-			})
+			}).then(data.callback)
 		},
 		// 批量删除
 		handleDelete: function (data) {

@@ -2,7 +2,8 @@
   <div>
     <!--表格栏-->
     <el-table :data="data.content" stripe highlight-current-row @selection-change="selectionChange" 
-      :v-loading="loading" :max-height="maxHeight" :size="size" :align="align" style="width:100%;" >
+          v-loading="loading" element-loading-text="拼命加载中" 
+          :max-height="maxHeight" :size="size" :align="align" style="width:100%;" >
       <el-table-column type="selection" width="40" v-if="showOperation"></el-table-column>
       <el-table-column v-for="column in columns" header-align="center" align="center"
         :prop="column.prop" :label="column.label" :width="column.width" :min-width="column.minWidth" 
@@ -69,7 +70,11 @@ export default {
   methods: {
     // 分页查询
     findPage: function () {
-      this.$emit('findPage', {pageRequest:this.pageRequest})
+        this.loading = true
+        let callback = res => {
+          this.loading = false
+        }
+      this.$emit('findPage', {pageRequest:this.pageRequest, callback:callback})
     },
     // 选择切换
     selectionChange: function (selections) {
@@ -103,9 +108,11 @@ export default {
 				for(var i=0; i<idArray.length; i++) {
 					params.push({'id':idArray[i]})
         }
+        this.loading = true
         let callback = res => {
           this.$message({message: '删除成功', type: 'success'})
           this.findPage()
+          this.loading = false
         }
         this.$emit('handleDelete', {params:params, callback:callback})
 			}).catch(() => {

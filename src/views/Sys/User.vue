@@ -16,7 +16,7 @@
 	</div>
 	<!--表格内容栏-->
 	<kt-table permsEdit="sys:user:edit" permsDelete="sys:user:delete"
-		:data="pageResult" :columns="columns" 
+		:data="pageResult" :columns="columns"
 		@findPage="findPage" @handleEdit="handleEdit" @handleDelete="handleDelete">
 	</kt-table>
 	<!--新增编辑界面-->
@@ -121,7 +121,7 @@ export default {
 			this.pageRequest.columnFilters = {name: {name:'name', value:this.filters.name}}
 			this.$api.user.findPage(this.pageRequest).then((res) => {
 				this.pageResult = res.data
-			})
+			}).then(data.callback)
 		},
 		// 批量删除
 		handleDelete: function (data) {
