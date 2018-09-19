@@ -101,13 +101,10 @@
                   </el-button>
                 </div>
               </el-popover> -->
-              <el-input v-model="dataForm.icon" v-popover:iconListPopover :readonly="true" placeholder="菜单图标名称" class="icon-list__input"></el-input>
+              <el-input v-model="dataForm.icon" v-popover:iconListPopover :readonly="true" placeholder="菜单图标名称（如：fa fa-home fa-lg）" class="icon-list__input"></el-input>
             </el-col>
             <el-col :span="2" class="icon-list__tips">
-              <el-tooltip placement="top" effect="light">
-                <div slot="content">推荐使用Font Aweson图标, 详细请参考:<a href="" target="_blank"></a>描述</div>
-                <i class="el-icon-warning"></i>
-              </el-tooltip>
+              <fa-icon-tooltip />
             </el-col>
           </el-row>
         </el-form-item>
@@ -124,11 +121,13 @@
 import KtButton from "@/views/Core/KtButton"
 import TableTreeColumn from '@/views/Core/TableTreeColumn'
 import PopupTreeInput from "@/components/PopupTreeInput"
+import FaIconTooltip from "@/components/FaIconTooltip"
 export default {
 	components:{
     PopupTreeInput,
     KtButton,
-    TableTreeColumn
+    TableTreeColumn,
+    FaIconTooltip
 	},
 	data() {
 		return {

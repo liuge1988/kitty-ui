@@ -8,28 +8,21 @@ export default {
     },
     getters: {
         collapse(state){// 对应着上面state
-            return state.collapse;
+            return state.collapse
         }
     },
     mutations: {
         onCollapse(state){  // 改变收缩状态
-            state.collapse = !state.collapse;
+            state.collapse = !state.collapse
         },
-        themeColor(state, themeColor){  // 改变收缩状态
-            state.themeColor = themeColor;
-        },
-        oldThemeColor(state, oldThemeColor){  // 改变收缩状态
-            state.oldThemeColor = oldThemeColor;
+        setThemeColor(state, themeColor){  // 改变主题颜色
+            state.oldThemeColor = state.themeColor
+            state.themeColor = themeColor
         },
         menuRouteLoaded(state, menuRouteLoaded){  // 改变菜单和路由的加载状态
             state.menuRouteLoaded = menuRouteLoaded;
         }
     },
     actions: {
-        // 改变主题颜色
-        onThemeChange ({ commit, state }, data) {
-            commit('themeColor', data.themeColor)
-            commit('oldThemeColor', data.oldThemeColor)
-        }
     }
 }
