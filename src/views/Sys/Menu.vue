@@ -15,7 +15,8 @@
 		</el-form>
 	</div>
 	<!--表格树内容栏-->
-    <el-table :data="dataList" stripe size="mini" style="width: 100%;">
+    <el-table :data="dataList" stripe size="mini" style="width: 100%;"
+      v-loading="loading" element-loading-text="拼命加载中" >
       <el-table-column
         prop="id" header-align="center" align="center" width="80" label="ID">
       </el-table-column>
@@ -132,6 +133,7 @@ export default {
 	data() {
 		return {
 			size: 'small',
+			loading: false,
 			filters: {
 				name: ''
       },
@@ -172,9 +174,11 @@ export default {
 	methods: {
 		// 获取数据
     findMenuTree: function () {
+      this.loading = true
 			this.$api.menu.findMenuTree().then((res) => {
         this.dataList = res.data
         this.menuTree = this.getParentMenuTree(res.data)
+        this.loading = false
 			})
     },
 		// 获取上级菜单树
@@ -210,7 +214,6 @@ export default {
 		},
     // 删除
     handleDelete (row) {
-      
       this.$confirm('确认删除选中记录吗？', '提示', {
 				type: 'warning'
       }).then(() => {
