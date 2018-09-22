@@ -28,3 +28,10 @@ export const findPage = (data) => {
         data
     })
 }
+// 查询全部
+export const findAll = () => {
+    return axios({
+        url: '/role/findAll',
+        method: 'get'
+    })
+}
