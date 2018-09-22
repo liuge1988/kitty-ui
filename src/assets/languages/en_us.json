@@ -8,6 +8,7 @@
         "projectRepo": "Project Reoposity",
         "myMsg": "My Message",
         "config": "Config",
+        "backup": "Backup|Restore",  
         "exit": "Exit"
     },
     "sys": {

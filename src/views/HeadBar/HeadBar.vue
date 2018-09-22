@@ -20,15 +20,18 @@
       <!-- 语言切换 -->
       <lang-selector class="lang-selector"></lang-selector>   
       <!-- 用户信息 -->
-      <el-dropdown class="user-info-dropdown" trigger="hover">
+      <el-dropdown class="user-info-dropdown" trigger="hover" @command="handleCommand">
         <span class="el-dropdown-link"><img :src="this.userAvatar" /> {{userName}}</span>
         <el-dropdown-menu slot="dropdown">
-          <el-dropdown-item>{{$t("common.myMsg")}}</el-dropdown-item>
-          <el-dropdown-item>{{$t("common.config")}}</el-dropdown-item>
+          <el-dropdown-item command="msg">{{$t("common.myMsg")}}</el-dropdown-item>
+          <el-dropdown-item command="config">{{$t("common.config")}}</el-dropdown-item>
+          <el-dropdown-item command="bakcup">{{$t("common.backup")}}</el-dropdown-item>
           <el-dropdown-item divided @click.native="logout">{{$t("common.logout")}}</el-dropdown-item>
         </el-dropdown-menu>
       </el-dropdown>
     </span>
+    <!--备份还原界面-->
+    <backup ref="backup" v-if="backupVisible" @afterRestore="afterRestore">  </backup>
   </div>
 </template>
 
@@ -38,17 +41,20 @@ import mock from "@/mock/index"
 import Hamburger from "@/components/Hamburger"
 import ThemePicker from "@/components/ThemePicker"
 import LangSelector from "@/components/LangSelector"
+import Backup from "@/views/Backup/Backup"
 export default {
   components:{
         Hamburger,
         ThemePicker,
-        LangSelector
+        LangSelector,
+        Backup
   },
   data() {
     return {
       userName: "Louis",
       userAvatar: "",
-      activeIndex: '1'
+      activeIndex: '1',
+      backupVisible: false
     }
   },
   methods: {
@@ -66,6 +72,26 @@ export default {
     onThemeChange: function(themeColor) {
       this.$store.commit('setThemeColor', themeColor)
     },
+    handleCommand(command) {
+      if('bakcup' === command) {
+        this.handleBackup()
+      }
+    },
+    // 打开备份还原界面
+    handleBackup: function() {
+      this.backupVisible = true
+      this.$nextTick(() => {
+          this.$refs.backup.init()
+      })
+    },
+    // 成功还原之后，重新登录
+    afterRestore: function() {
+        sessionStorage.removeItem("user")
+        this.$router.push("/login")
+        this.$api.login.logout().then((res) => {
+          }).catch(function(res) {
+        })
+    },
     // 退出登录
     logout: function() {
       this.$confirm("确认退出吗?", "提示", {
@@ -76,7 +102,7 @@ export default {
         this.$router.push("/login")
         this.$api.login.logout().then((res) => {
           }).catch(function(res) {
-          })
+        })
       })
       .catch(() => {})
     }
