@@ -23,7 +23,7 @@
 	<el-dialog :title="operation?'新增':'编辑'" width="40%" :visible.sync="dialogVisible" :close-on-click-modal="false">
 		<el-form :model="dataForm" label-width="80px" :rules="dataFormRules" ref="dataForm" :size="size"
 			label-position="right">
-			<el-form-item label="ID" prop="id">
+			<el-form-item label="ID" prop="id" v-if="false">
 				<el-input v-model="dataForm.id" :disabled="true" auto-complete="off"></el-input>
 			</el-form-item>
 			<el-form-item label="用户名" prop="name">
@@ -135,7 +135,7 @@ export default {
 			this.$api.user.findPage(this.pageRequest).then((res) => {
 				this.pageResult = res.data
 				this.findUserRoles()
-			}).then(data.callback)
+			}).then(data!=null?data.callback:'')
 		},
 		// 加载用户角色信息
 		findUserRoles: function () {
@@ -146,7 +146,7 @@ export default {
 		},
 		// 批量删除
 		handleDelete: function (data) {
-			this.$api.user.batchDelete(data.params).then(data.callback)
+			this.$api.user.batchDelete(data.params).then(data!=null?data.callback:'')
 		},
 		// 显示新增界面
 		handleAdd: function () {
@@ -192,14 +192,14 @@ export default {
 						}
 						params.userRoles = userRoles
 						this.$api.user.save(params).then((res) => {
+							this.editLoading = false
 							if(res.code == 200) {
 								this.$message({ message: '操作成功', type: 'success' })
+								this.dialogVisible = false
+								this.$refs['dataForm'].resetFields()
 							} else {
 								this.$message({message: '操作失败, ' + res.msg, type: 'error'})
 							}
-							this.editLoading = false
-							this.$refs['dataForm'].resetFields()
-							this.dialogVisible = false
 							this.findPage(null)
 						})
 					})

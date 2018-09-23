@@ -7,7 +7,7 @@
 				<el-input v-model="filters.label" placeholder="名称"></el-input>
 			</el-form-item>
 			<el-form-item>
-				<kt-button label="查询" perms="sys:dict:view" type="primary" @click="findMenuTree(null)"/>
+				<kt-button label="查询" perms="sys:dict:view" type="primary" @click="findPage(null)"/>
 			</el-form-item>
 			<el-form-item>
 				<kt-button label="新增" perms="sys:dict:add" type="primary" @click="handleAdd" />
@@ -22,7 +22,7 @@
 	<!--新增编辑界面-->
 	<el-dialog :title="operation?'新增':'编辑'" width="40%" :visible.sync="editDialogVisible" :close-on-click-modal="false">
 		<el-form :model="dataForm" label-width="80px" :rules="dataFormRules" ref="dataForm" :size="size">
-			<el-form-item label="ID" prop="id">
+			<el-form-item label="ID" prop="id"  v-if="false">
 				<el-input v-model="dataForm.id" :disabled="true" auto-complete="off"></el-input>
 			</el-form-item>
 			<el-form-item label="名称" prop="label">
@@ -111,11 +111,11 @@ export default {
 			this.pageRequest.columnFilters = {label: {name:'label', value:this.filters.label}}
 			this.$api.dict.findPage(this.pageRequest).then((res) => {
 				this.pageResult = res.data
-			}).then(data.callback)
+			}).then(data!=null?data.callback:'')
 		},
 		// 批量删除
 		handleDelete: function (data) {
-			this.$api.dict.batchDelete(data.params).then(data.callback)
+			this.$api.dict.batchDelete(data.params).then(data!=null?data.callback:'')
 		},
 		// 显示新增界面
 		handleAdd: function () {

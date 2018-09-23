@@ -1,10 +1,10 @@
 <template>
   <div>
     <!--表格栏-->
-    <el-table :data="data.content" stripe highlight-current-row @selection-change="selectionChange" 
-          v-loading="loading" element-loading-text="拼命加载中" 
-          :max-height="maxHeight" :size="size" :align="align" style="width:100%;" >
-      <el-table-column type="selection" width="40" v-if="showOperation"></el-table-column>
+    <el-table :data="data.content" :highlight-current-row="highlightCurrentRow" @selection-change="selectionChange" 
+          @current-change="handleCurrentChange" v-loading="loading" element-loading-text="拼命加载中" :border="border" :stripe="stripe"
+          :show-overflow-tooltip="showOverflowTooltip" :max-height="maxHeight" :size="size" :align="align" style="width:100%;" >
+      <el-table-column type="selection" width="40" v-if="showBatchDelete & showOperation"></el-table-column>
       <el-table-column v-for="column in columns" header-align="center" align="center"
         :prop="column.prop" :label="column.label" :width="column.width" :min-width="column.minWidth" 
         :fixed="column.fixed" :key="column.prop" :type="column.type" :sortable="column.sortable==null?true:column.sortable">
@@ -19,7 +19,7 @@
     <!--分页栏-->
     <div class="toolbar" style="padding:10px;">
       <kt-button label="批量删除" :perms="permsDelete" :size="size" type="danger" @click="handleBatchDelete()" 
-        :disabled="this.selections.length===0" style="float:left;" v-if="showOperation"/>
+        :disabled="this.selections.length===0" style="float:left;" v-if="showBatchDelete & showOperation"/>
       <el-pagination layout="total, prev, pager, next, jumper" @current-change="refreshPageRequest" 
         :current-page="pageRequest.pageNum" :page-size="pageRequest.pageSize" :total="data.totalSize" style="float:right;">
       </el-pagination>
@@ -54,6 +54,26 @@ export default {
     showOperation: {  // 是否显示操作组件
       type: Boolean,
       default: true
+    },
+    border: {  // 是否显示边框
+      type: Boolean,
+      default: false
+    },
+    stripe: {  // 是否显示斑马线
+      type: Boolean,
+      default: true
+    },
+    highlightCurrentRow: {  // // 是否高亮当前行
+      type: Boolean,
+      default: true
+    },
+    showOverflowTooltip: {  // 是否单行显示
+      type: Boolean,
+      default: true
+    },
+    showBatchDelete: {  // 是否显示操作组件
+      type: Boolean,
+      default: true
     }
   },
   data() {
@@ -78,7 +98,12 @@ export default {
     },
     // 选择切换
     selectionChange: function (selections) {
-			this.selections = selections
+      this.selections = selections
+      this.$emit('selectionChange', {selections:selections})
+    },
+    // 选择切换
+    handleCurrentChange: function (val) {
+      this.$emit('handleCurrentChange', {val:val})
     },
     // 换页刷新
 		refreshPageRequest: function (pageNum) {

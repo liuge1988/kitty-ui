@@ -115,3 +115,16 @@ export function getContent(pageNum, pageSize) {
   }
   return content
 }
+// 查询角色菜单集合
+export function findRoleMenus(params) {
+  let findRoleMenuData = {
+    "code": 200,
+    "msg": null,
+    "data": {}
+  }
+  return {
+    url: 'role/findRoleMenus',
+    type: 'get',
+    data: findRoleMenuData
+  }
+}

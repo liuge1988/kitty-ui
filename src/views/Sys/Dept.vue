@@ -52,7 +52,7 @@
         </el-form-item>
         <el-form-item label="上级机构" prop="parentName">
             <popup-tree-input 
-              :data="popupTreeData" :props="popupTreeProps" :prop="dataForm.parentName==null?'根节点':dataForm.parentName" 
+              :data="popupTreeData" :props="popupTreeProps" :prop="dataForm.parentName==null?'顶级菜单':dataForm.parentName" 
               :nodeKey="''+dataForm.parentId" :currentChangeHandle="handleTreeSelectChange">
             </popup-tree-input>
         </el-form-item>
@@ -124,8 +124,8 @@ export default {
 		// 获取上级机构树
     getParentMenuTree: function (tableTreeDdata) {
       let parent = {
-        parentId: -1,
-        name: '根节点',
+        parentId: 0,
+        name: '顶级菜单',
         children: tableTreeDdata
       }
       return [parent]
@@ -181,14 +181,14 @@ export default {
 						this.editLoading = true
 						let params = Object.assign({}, this.dataForm)
 						this.$api.dept.save(params).then((res) => {
+              this.editLoading = false
               if(res.code == 200) {
 								this.$message({ message: '操作成功', type: 'success' })
+                this.dialogVisible = false
+                this.$refs['dataForm'].resetFields()
 							} else {
 								this.$message({message: '操作失败, ' + res.msg, type: 'error'})
 							}
-							this.editLoading = false
-							this.$refs['dataForm'].resetFields()
-							this.dialogVisible = false
 							this.findTreeData()
 						})
 					})
