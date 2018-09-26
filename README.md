@@ -1,7 +1,7 @@
 # kitty-ui
 
 ### 在线Demo：
-演示地址：[http://139.196.87.48:9002/kitty](http://http://139.196.87.48:9002/kitty)
+演示地址：[http://139.196.87.48:9002/kitty](http://139.196.87.48:9002/kitty)
 
 用户名：admin 密码：admin
 
