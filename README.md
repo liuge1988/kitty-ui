@@ -1,7 +1,8 @@
 # kitty-ui
 
-### 在线演示：
-演示地址：[http://139.196.87.48:9002/kitty](http://139.196.87.48:9002/kitty)
+
+### 在线演示
+演示地址：http://139.196.87.48:9002/kitty
 
 用户名：admin 密码：admin
 
@@ -51,11 +52,11 @@
 
 ##### 项目结构
 
-- kitty-pom： 统一管理 Maven 版本，打包配置
 - kitty-common： 公共代码模块，主要放置工具类
 - kitty-core： 核心代码模块，主要封装公共业务模块
 - kitty-admin： 后台管理模块，包含用户、角色、菜单管理等
-- kitty-boot： Spring Boot 启动模块，包含一些全局配置信息
+- kitty-backup： 系统数据备份备份模块，可选择独立部署
+- kitty-monitor： 系统监控服务端，监控Spring Boot服务模块
 
 #### 前端架构
 
@@ -75,6 +76,7 @@
 
 ##### 项目结构
 
+kitty-ui
 - assets： 图标、字体、国际化信息等静态信息
 - components： 组件库，对常用组件进行封装
 - http： 后台交互模块，统一后台接口请求API
@@ -105,11 +107,17 @@
 
 4. 导入数据库
 
-    新建 kitty 数据库，导入 kitty-pom 工程 doc 下的 SQL 脚本，导入初始化数据库。
+    新建 kitty 数据库，导入 kitty-admin 工程 doc 下的 SQL 脚本，导入初始化数据库。
 
 5. 启动系统
 
-    找到 kitty-boot 工程下的 KittyApplication.java, 执行 Java 程序，启动项目。
+    找到 kitty-monitor 工程下的 KittyMonitorApplication, 执行 Java 程序，启动项目。
+
+    找到 kitty-admin 工程下的 KittyAdminApplication, 执行 Java 程序，启动项目。
+
+    找到 kitty-backup 工程下的 KittyBackupApplication.java, 执行 Java 程序，启动项目。
+    
+    注意：监控服务器 monitor 要先启动，其他无所谓。
 
 #### 前端安装
 
