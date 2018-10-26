@@ -109,7 +109,11 @@ kitty-ui
 
 3. 编译代码
 
-    找到 kitty-pom 工程的 pom.xml，执行 maven clean install 命令编译打包。
+    找到 kitty-monitor 工程的 pom.xml，执行 maven clean install 命令编译打包。
+    
+    找到 kitty-admin 工程的 pom.xml，执行 maven clean install 命令编译打包。
+
+    找到 kitty-backup 工程的 pom.xml，执行 maven clean install 命令编译打包。
 
 4. 导入数据库
 
