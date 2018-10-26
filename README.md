@@ -5,8 +5,15 @@
 
 用户名：admin 密码：admin
 
+### 技术交流
+
+为了方便大家提问和技术交流，整了个QQ群，欢迎童鞋们加入。
+
+QQ技术交流群： 429854222
+
 ### 博客教程
-本人技术博客提供同步系列文章教程
+
+本人技术博客提供同步系列文章教程, 讲解了Kitty从零开始搭建的全过程：
 
 [Spring Boot + Spring Cloud 实现权限管理系统 后端篇](https://www.cnblogs.com/xifengxiaoma/p/9474953.html)
 
