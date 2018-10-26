@@ -119,6 +119,8 @@ kitty-ui
 
     新建 kitty 数据库，导入 kitty-admin 工程 doc 下的 SQL 脚本，导入初始化数据库。
 
+    修改 kitty-admin 下 application.yml 中的数据库连接和账号密码为自己的数据库配置。
+
 5. 启动系统
 
     找到 kitty-monitor 工程下的 KittyMonitorApplication, 执行 Java 程序，启动项目。
@@ -151,6 +153,11 @@ kitty-ui
 
     通过修改src/mock/index.js中的openMock变量，可以一键开启或关闭Mock功能。
 
+6.修改配置
+
+    如果想自定义端口（默认是8090），可以修改 config/index.js 下的 port 属性。
+
+    后台服务器和备份服务器地址配置在 src/utils/global.js 文件中个，按需修改。
 
 #### 系统展示
 
