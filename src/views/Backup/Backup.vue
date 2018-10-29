@@ -4,7 +4,7 @@
         :before-close="handleClose" size="small" top="5vh">
         <el-table :data="tableData" style="width: 100%;font-size:16px;" height="330px" :show-header="showHeader"
             size="mini" v-loading="tableLoading" :element-tableLoading-text="$t('action.loading')">
-            <el-table-column prop="title" label="版本名称" header-align="center" align="center">  
+            <el-table-column prop="title" :label="$t('common.versionName')" header-align="center" align="center">  
             </el-table-column>
             <el-table-column fixed="right" :label="$t('action.operation')" width="150">
                 <template slot-scope="scope">
