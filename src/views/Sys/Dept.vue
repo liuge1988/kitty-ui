@@ -7,16 +7,16 @@
 				<el-input v-model="filters.name" placeholder="名称"></el-input>
 			</el-form-item>
 			<el-form-item>
-				<kt-button label="查询" perms="sys:dept:view" type="primary" @click="findTreeData(null)"/>
+				<kt-button :label="$t('action.search')" perms="sys:dept:view" type="primary" @click="findTreeData(null)"/>
 			</el-form-item>
 			<el-form-item>
-				<kt-button label="新增" perms="sys:dept:add" type="primary" @click="handleAdd"/>
+				<kt-button :label="$t('action.add')" perms="sys:dept:add" type="primary" @click="handleAdd"/>
 			</el-form-item>
 		</el-form>
 	</div>
 	<!--表格树内容栏-->
     <el-table :data="tableTreeDdata" stripe size="mini" style="width: 100%;"
-      v-loading="loading" element-loading-text="拼命加载中">
+      v-loading="loading" element-loading-text="$t('action.loading')">
       <el-table-column
         prop="id" header-align="center" align="center" width="80" label="ID">
       </el-table-column>
@@ -36,10 +36,10 @@
         prop="createTime" header-align="center" align="center" label="创建时间">
       </el-table-column>
       <el-table-column
-        fixed="right" header-align="center" align="center" width="150" label="操作">
+        fixed="right" header-align="center" align="center" width="180" :label="$t('action.operation')">
         <template slot-scope="scope">
-          <kt-button label="修改" perms="sys:dept:edit" @click="handleEdit(scope.row)"/>
-          <kt-button label="删除" perms="sys:dept:delete" type="danger" @click="handleDelete(scope.row)"/>
+          <kt-button :label="$t('action.edit')" perms="sys:dept:edit" @click="handleEdit(scope.row)"/>
+          <kt-button :label="$t('action.delete')" perms="sys:dept:delete" type="danger" @click="handleDelete(scope.row)"/>
         </template>
       </el-table-column>
     </el-table>
@@ -61,8 +61,8 @@
         </el-form-item>
       </el-form>
       <span slot="footer" class="dialog-footer">
-        <el-button :size="size"  @click="dialogVisible = false">取消</el-button>
-        <el-button :size="size"  type="primary" @click="submitForm()">确定</el-button>
+        <el-button :size="size"  @click="dialogVisible = false">{{$t('action.cancel')}}</el-button>
+        <el-button :size="size"  type="primary" @click="submitForm()">{{$t('action.comfirm')}}</el-button>
       </span>
     </el-dialog>
   </div>

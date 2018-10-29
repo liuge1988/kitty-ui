@@ -1,21 +1,21 @@
 <template>
 	<!--备份还原界面-->
-	<el-dialog title="备份还原" width="40%" :visible.sync="visible" :close-on-click-modal="false"
+	<el-dialog :title="$t('common.backupRestore')" width="40%" :visible.sync="visible" :close-on-click-modal="false"
         :before-close="handleClose" size="small" top="5vh">
         <el-table :data="tableData" style="width: 100%;font-size:16px;" height="330px" :show-header="showHeader"
-            size="mini" v-loading="tableLoading" element-tableLoading-text="拼命加载中">
+            size="mini" v-loading="tableLoading" :element-tableLoading-text="$t('action.loading')">
             <el-table-column prop="title" label="版本名称" header-align="center" align="center">  
             </el-table-column>
-            <el-table-column fixed="right" label="操作" width="150">
+            <el-table-column fixed="right" :label="$t('action.operation')" width="150">
                 <template slot-scope="scope">
-                    <el-button @click="handleRestore(scope.row)" type="primary" size="mini">还原</el-button>
-                    <el-button @click="handleDelete(scope.row)" type="danger" :disabled="scope.row.name=='backup'?true:false" size="mini">删除</el-button>
+                    <el-button @click="handleRestore(scope.row)" type="primary" size="mini">{{$t('common.restore')}}</el-button>
+                    <el-button @click="handleDelete(scope.row)" type="danger" :disabled="scope.row.name=='backup'?true:false" size="mini">{{$t('action.delete')}}</el-button>
                 </template>
             </el-table-column>
         </el-table>
         <span slot="footer" class="dialog-footer">
-            <el-button size="small"  @click="visible = false">取消</el-button>
-            <el-button size="small"  type="primary" @click="handleBackup" :loading="backupLoading">备份</el-button>
+            <el-button size="small"  @click="visible = false">{{$t('action.cancel')}}</el-button>
+            <el-button size="small"  type="primary" @click="handleBackup" :loading="backupLoading">{{$t('common.backup')}}</el-button>
         </span>
 	</el-dialog>
 </template>

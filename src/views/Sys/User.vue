@@ -7,10 +7,10 @@
 				<el-input v-model="filters.name" placeholder="用户名"></el-input>
 			</el-form-item>
 			<el-form-item>
-				<kt-button label="查询" perms="sys:role:view" type="primary" @click="findPage(null)"/>
+				<kt-button :label="$t('action.search')" perms="sys:role:view" type="primary" @click="findPage(null)"/>
 			</el-form-item>
 			<el-form-item>
-				<kt-button label="新增" perms="sys:user:add" type="primary" @click="handleAdd" />
+				<kt-button :label="$t('action.add')" perms="sys:user:add" type="primary" @click="handleAdd" />
 			</el-form-item>
 		</el-form>
 	</div>
@@ -58,8 +58,8 @@
 			
 		</el-form>
 		<div slot="footer" class="dialog-footer">
-			<el-button :size="size" @click.native="dialogVisible = false">取消</el-button>
-			<el-button :size="size" type="primary" @click.native="submitForm" :loading="editLoading">提交</el-button>
+			<el-button :size="size" @click.native="dialogVisible = false">{{$t('action.cancel')}}</el-button>
+			<el-button :size="size" type="primary" @click.native="submitForm" :loading="editLoading">{{$t('action.submit')}}</el-button>
 		</div>
 	</el-dialog>
   </div>
