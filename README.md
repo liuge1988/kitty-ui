@@ -63,6 +63,7 @@ QQ技术交流群： 429854222
 ##### 技术选型
 
 - 核心框架：Spring Boot 2.x
+- 服务治理：Spring Cloud Finchley
 - 安全框架：Apache Shiro 1.4.x
 - 视图框架：Spring MVC 5.x
 - 持久层框架：MyBatis 3.x
