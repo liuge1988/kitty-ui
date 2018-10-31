@@ -125,15 +125,13 @@ kitty-ui
 
 3. 编译代码
 
-    找到 kitty-monitor 工程的 pom.xml，执行 maven clean install 命令编译打包。
-    
-    找到 kitty-admin 工程的 pom.xml，执行 maven clean install 命令编译打包。
+    找到 kitty-pom 工程的 pom.xml，执行 maven clean install 命令编译一键打包。
 
-    找到 kitty-backup 工程的 pom.xml，执行 maven clean install 命令编译打包。
+    一般来说不会有什么问题，如果还是编译不成功，可以按照优先级逐个编译试一试。
 
 4. 导入数据库
 
-    新建 kitty 数据库，导入 kitty-admin 工程 doc 下的 SQL 脚本，导入初始化数据库。
+    新建 kitty 数据库，导入 kitty-admin 工程 doc/kitty.sql 脚本，导入初始化数据库。
 
     修改 kitty-admin 下 application.yml 中的数据库连接和账号密码为自己的数据库配置。
 
