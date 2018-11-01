@@ -32,7 +32,11 @@ function fnCreate (mod, isOpen = true) {
     for (var key in mod) {
       ((res) => {
         if (res.isOpen !== false) {
-          let url = baseUrl + res.url
+          let url = baseUrl
+          if(!url.endsWith("/")) {
+            url = url + "/"
+          }
+          url = url + res.url
           Mock.mock(new RegExp(url), res.type, (opts) => {
             opts['data'] = opts.body ? JSON.parse(opts.body) : null
             delete opts.body

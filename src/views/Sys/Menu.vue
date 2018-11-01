@@ -71,7 +71,7 @@
         </el-form-item>
         <el-form-item label="上级菜单" prop="parentName">
             <popup-tree-input 
-              :data="popupTreeData" :props="popupTreeProps" :prop="dataForm.parentName==null?'顶级菜单':dataForm.parentName" 
+              :data="popupTreeData" :props="popupTreeProps" :prop="dataForm.parentName==null||dataForm.parentName==''?'顶级菜单':dataForm.parentName" 
               :nodeKey="''+dataForm.parentId" :currentChangeHandle="handleTreeSelectChange">
             </popup-tree-input>
         </el-form-item>
@@ -102,7 +102,7 @@
                   </el-button>
                 </div>
               </el-popover> -->
-              <el-input v-model="dataForm.icon" v-popover:iconListPopover :readonly="true" placeholder="菜单图标名称（如：fa fa-home fa-lg）" class="icon-list__input"></el-input>
+              <el-input v-model="dataForm.icon" v-popover:iconListPopover :readonly="false" placeholder="菜单图标名称（如：fa fa-home fa-lg）" class="icon-list__input"></el-input>
             </el-col>
             <el-col :span="2" class="icon-list__tips">
               <fa-icon-tooltip />
@@ -155,9 +155,6 @@ export default {
       dataRule: {
         name: [
           { required: true, message: '菜单名称不能为空', trigger: 'blur' }
-        ],
-        parentName: [
-          { required: true, message: '上级菜单不能为空', trigger: 'change' }
         ]
       },
       popupTreeData: [],
