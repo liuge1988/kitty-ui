@@ -19,10 +19,20 @@ QQ技术交流群： 429854222
 
 [Vue.js + Element UI 实现权限管理系统 前端篇](https://www.cnblogs.com/xifengxiaoma/p/9533018.html)
 
+### 分支说明
+
+- master: 主推版本分支，支持分布式，服务治理（Spring Cloud）
+
+- dev: 开发分支，适时合并到master分支，支持分布式，服务治理（Spring Cloud）
+
+- shiro: 基于Spring Boot，不包含 Spring Cloud，部署环境稍微简单一点
+
 ### 项目介绍
 
 - Kitty是基于Spring Boot、Spring Cloud、Vue、Element实现的Java快速开发平台。
+
 - 目标是搭建出一套简洁易用的快速解决方案，可以帮助用户有效降低项目开发难度和成本。
+
 - 个人博客提供本项目开发过程同步系列教程文章，手把手的教你如何开发同类系统。
 
 ### 功能计划
@@ -37,11 +47,16 @@ QQ技术交流群： 429854222
 - ✔ 聚合文档：定制在线文档，提供简洁美观的API文档
 - ✔ 备份还原：系统备份还原，一键恢复系统初始化数据
 - ✔ 主题切换：支持主题切换，自定主题颜色，一键换肤
-- ✘ 微服务化：集成Spring Cloud，实现服务治理功能
-- ✘ 服务监控：结合微服务治理，实现服务的全方位监控
-- ✘ 服务限流：结合微服务治理，实现有效的服务限流
+- ✔ 服务治理：集成Consul注册中心，实现服务注册和发现
+- ✔ 服务监控：集成Spring Boot Admin，实现服务监控
+- ✘ 服务消费：集成Ribbon、Feign，服务调用和负载均衡
+- ✘ 服务网关：集成Spring Cloud Zuul，实现API网关
+- ✘ 服务熔断：集成Hystrix、Turbine，实现熔断和监控
+- ✘ 链路追踪：集成Sleuth、Zipkin，实现分布式链路追踪
+- ✘ 配置中心：集成Config、Bus，实现分布式配置中心
 - ✘ 单点登录：利用 OAuth2, 提供统一的单点登录功能
 - ✘ 系统登录：集成第三方登录功能（QQ、微信、微博）
+- ✘ 代码生成：提供代码生成器，最大化的降低代码开发量
 - ...
 
 ### 软件架构
@@ -58,6 +73,7 @@ QQ技术交流群： 429854222
 ##### 技术选型
 
 - 核心框架：Spring Boot 2.x
+- 服务治理：Spring Cloud Finchley
 - 安全框架：Apache Shiro 1.4.x
 - 视图框架：Spring MVC 5.x
 - 持久层框架：MyBatis 3.x
@@ -72,6 +88,7 @@ QQ技术交流群： 429854222
 - kitty-admin： 后台管理模块，包含用户、角色、菜单管理等
 - kitty-backup： 系统数据备份备份模块，可选择独立部署
 - kitty-monitor： 系统监控服务端，监控Spring Boot服务模块
+- kitty-pom： 聚合模块，仅为简化打包，一键执行打包所有模块
 
 #### 前端架构
 
@@ -108,6 +125,10 @@ kitty-ui
 
 #### 后端安装
 
+Spring Coud 分支（dev，master）使用 Consul 作为注册中心，Consul 按照教程参考：
+
+[Spring Boot + Spring Cloud 实现权限管理系统 后端篇（十八）：服务注册和发现（Consul）](https://www.cnblogs.com/xifengxiaoma/p/9857996.html)
+
 1. 下载源码
 
     git clone https://gitee.com/liuge1988/kitty.git
@@ -118,15 +139,13 @@ kitty-ui
 
 3. 编译代码
 
-    找到 kitty-monitor 工程的 pom.xml，执行 maven clean install 命令编译打包。
-    
-    找到 kitty-admin 工程的 pom.xml，执行 maven clean install 命令编译打包。
+    找到 kitty-pom 工程的 pom.xml，执行 maven clean install 命令编译一键打包。
 
-    找到 kitty-backup 工程的 pom.xml，执行 maven clean install 命令编译打包。
+    一般来说不会有什么问题，如果还是编译不成功，可以按照优先级逐个编译试一试。
 
 4. 导入数据库
 
-    新建 kitty 数据库，导入 kitty-admin 工程 doc 下的 SQL 脚本，导入初始化数据库。
+    新建 kitty 数据库，导入 kitty-admin 工程 doc/kitty.sql 脚本，导入初始化数据库。
 
     修改 kitty-admin 下 application.yml 中的数据库连接和账号密码为自己的数据库配置。
 
