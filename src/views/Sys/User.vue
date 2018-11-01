@@ -49,7 +49,7 @@
 			</el-form-item>
 			<el-form-item label="角色" prop="userRoles" v-if="!operation">
 				<el-select v-model="dataForm.userRoles" multiple placeholder="请选择"
-					@handleOptionClick="handleOptionClick">
+					 style="width: 100%;">
 					<el-option v-for="item in roles" :key="item.id"
 						:label="item.remark" :value="item.id">
 					</el-option>
@@ -216,10 +216,7 @@ export default {
       	deptTreeCurrentChangeHandle (data, node) {
         	this.dataForm.deptId = data.id
         	this.dataForm.deptName = data.name
-		},
-		// 菜单树选中
-      	handleOptionClick () {
-      	}
+		}
 	},
 	mounted() {
 		this.findDeptTree()
