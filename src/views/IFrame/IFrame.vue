@@ -15,7 +15,7 @@ export default {
   methods: {
     // 获取路径
     resetSrc: function (url) {
-      this.src = this.global.baseUrl + url
+      this.src = url
     }
   },
   mounted(){
@@ -25,7 +25,7 @@ export default {
     $route: {
       handler: function (val, oldVal) {
         // 如果是跳转到嵌套页面，切换iframe的url
-        this.resetSrc(val.path)
+        this.resetSrc(this.$store.state.iframe.iframeUrl)
       }
     }
   }

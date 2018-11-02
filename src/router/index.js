@@ -6,7 +6,7 @@ import Home from '@/views/Home'
 import Intro from '@/views/Intro/Intro'
 import api from '@/http/api'
 import store from '@/store'
-import { getIFrameUrl } from '@/utils/iframe'
+import { getIFramePath, getIFrameUrl } from '@/utils/iframe'
 
 Vue.use(Router)
 
@@ -64,8 +64,8 @@ router.beforeEach((to, from, next) => {
 * 加载动态菜单和路由
 */
 function addDynamicMenuAndRoutes(userName, to, from) {
-  // 保存iframeUrl到store，供IFrame组件读取展示
-  store.commit('setIFrameUrl', to.path)
+  // 处理IFrame嵌套页面
+  handleIFrameUrl(to.path)
   if(store.state.app.menuRouteLoaded) {
     console.log('动态菜单和路由已经存在.')
     return
@@ -91,6 +91,23 @@ function addDynamicMenuAndRoutes(userName, to, from) {
 }
 
 /**
+ * 处理IFrame嵌套页面
+ */
+function handleIFrameUrl(path) {
+  // 嵌套页面，保存iframeUrl到store，供IFrame组件读取展示
+  let url = path
+  let length = store.state.iframe.iframeUrls.length
+  for(let i=0; i<length; i++) {
+    let iframe = store.state.iframe.iframeUrls[i]
+    if(path != null && path.endsWith(iframe.path)) {
+      url = iframe.url
+      store.commit('setIFrameUrl', url)
+      break
+    }
+  }
+}
+
+/**
 * 添加动态(菜单)路由
 * @param {*} menuList 菜单列表
 * @param {*} routes 递归创建的动态(菜单)路由
@@ -108,11 +125,15 @@ function addDynamicRoutes (menuList = [], routes = []) {
         component: null,
         name: menuList[i].name
       }
-      let path = getIFrameUrl(menuList[i].url)
+      let path = getIFramePath(menuList[i].url)
       if (path) {
         // 如果是嵌套页面, 通过iframe展示
         route['path'] = path
         route['component'] = resolve => require([`@/views/IFrame/IFrame`], resolve)
+        // 存储嵌套页面路由路径和访问URL
+        let url = getIFrameUrl(menuList[i].url)
+        let iFrameUrl = {'path':path, 'url':url}
+        store.commit('addIFrameUrl', iFrameUrl)
       } else {
        try {
          // 根据菜单URL动态加载vue组件，这里要求vue组件须按照url路径存储

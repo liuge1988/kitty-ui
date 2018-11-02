@@ -13,7 +13,7 @@
 </template>
 
 <script>
-import { getIFrameUrl } from '@/utils/iframe'
+import { getIFrameUrl, getIFramePath } from '@/utils/iframe'
 export default {
   name: 'MenuTree',
   props: {
@@ -24,14 +24,14 @@ export default {
   },
   methods: {
     handleRoute (menu) {
-    // 如果是嵌套页面，转换成iframe的url
-    let url = getIFrameUrl(menu.url)
-    if(!url) {
-      url = menu.url
+    // 如果是嵌套页面，转换成iframe的path
+    let path = getIFramePath(menu.url)
+    if(!path) {
+      path = menu.url
     }
     // 通过菜单URL跳转至指定路由
     this.$router.push("/")
-    this.$router.push(url)
+    this.$router.push(path)
     }
   }
 }
