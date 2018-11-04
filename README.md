@@ -1,9 +1,14 @@
-# kitty-ui
+# kitty
 
 ### 在线演示
+
 演示地址：http://139.196.87.48:9002/kitty
 
 用户名：admin 密码：admin
+
+温馨提示：
+有在演示环境删除数据的童鞋们，如果可以的话，麻烦动动小指，右键头像菜单，
+选择 -> 备份还原 帮忙恢复到系统默认备份数据，方便后来的童鞋查看，谢谢啦。
 
 ### 技术交流
 
@@ -15,9 +20,9 @@ QQ技术交流群： 429854222
 
 本人技术博客提供同步系列文章教程, 讲解了Kitty从零开始搭建的全过程：
 
-[Spring Boot + Spring Cloud 实现权限管理系统 后端篇](https://www.cnblogs.com/xifengxiaoma/p/9474953.html)
-
 [Vue.js + Element UI 实现权限管理系统 前端篇](https://www.cnblogs.com/xifengxiaoma/p/9533018.html)
+
+[Spring Boot + Spring Cloud 实现权限管理系统 后端篇](https://www.cnblogs.com/xifengxiaoma/p/9474953.html)
 
 ### 分支说明
 
@@ -36,6 +41,7 @@ QQ技术交流群： 429854222
 - 个人博客提供本项目开发过程同步系列教程文章，手把手的教你如何开发同类系统。
 
 ### 功能计划
+
 - ✔ 系统登录：系统用户登录，系统登录认证（token方式）
 - ✔ 用户管理：新建用户，修改用户，删除用户，查询用户
 - ✔ 机构管理：新建机构，修改机构，删除机构，查询机构
@@ -77,7 +83,6 @@ QQ技术交流群： 429854222
 - 安全框架：Apache Shiro 1.4.x
 - 视图框架：Spring MVC 5.x
 - 持久层框架：MyBatis 3.x
-- 定时器：Quartz 2.x
 - 数据库连接池：Druid 1.x
 - 日志管理：SLF4J、Log4j
 
@@ -125,7 +130,7 @@ kitty-ui
 
 #### 后端安装
 
-Spring Coud 分支（dev，master）使用 Consul 作为注册中心，Consul 按照教程参考：
+Spring Coud 分支（dev，master）使用 Consul 作为注册中心，Consul 安装教程参考：
 
 [Spring Boot + Spring Cloud 实现权限管理系统 后端篇（十八）：服务注册和发现（Consul）](https://www.cnblogs.com/xifengxiaoma/p/9857996.html)
 
@@ -149,7 +154,11 @@ Spring Coud 分支（dev，master）使用 Consul 作为注册中心，Consul �
 
     修改 kitty-admin 下 application.yml 中的数据库连接和账号密码为自己的数据库配置。
 
+    修改 kitty-backup 下 application.yml 中的数据库连接和账号密码为自己的数据库配置。
+
 5. 启动系统
+    
+    找到 Consul 注册中心安装目录，执行 consul agent -dev 启动注册中心，不了解请先百度。
 
     找到 kitty-monitor 工程下的 KittyMonitorApplication, 执行 Java 程序，启动项目。
 
@@ -157,7 +166,7 @@ Spring Coud 分支（dev，master）使用 Consul 作为注册中心，Consul �
 
     找到 kitty-backup 工程下的 KittyBackupApplication.java, 执行 Java 程序，启动项目。
     
-    注意：监控服务器 monitor 要先启动，其他无所谓。
+    注意：注册中心和监控服务器 monitor 要先启动，其他无所谓。
 
 #### 前端安装
 
@@ -167,7 +176,7 @@ Spring Coud 分支（dev，master）使用 Consul 作为注册中心，Consul �
 
 2. 编译代码
 
-    进入项目根目录，执行 npm install, 下载安装项目依赖包。
+    进入项目根目录，执行 npm install, 下载和安装项目相关依赖包。
 
 3. 启动系统
 
@@ -185,8 +194,8 @@ Spring Coud 分支（dev，master）使用 Consul 作为注册中心，Consul �
 
     如果想自定义端口（默认是8090），可以修改 config/index.js 下的 port 属性。
 
-    后台服务器和备份服务器地址配置在 src/utils/global.js 文件中个，按需修改。
-
+    后台接口和备份服务器地址配置在 src/utils/global.js，如有修改请做相应变更。
+    
 #### 系统展示
 
 ##### 登录界面
