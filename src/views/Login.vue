@@ -123,7 +123,7 @@ export default {
     border-radius: 5px;
     -moz-border-radius: 5px;
     background-clip: padding-box;
-    margin: 150px auto;
+    margin: 100px auto;
     width: 350px;
     padding: 35px 35px 15px 35px;
     background: #fff;
