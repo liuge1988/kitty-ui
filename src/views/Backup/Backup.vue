@@ -6,7 +6,7 @@
             size="mini" v-loading="tableLoading" :element-tableLoading-text="$t('action.loading')">
             <el-table-column prop="title" :label="$t('common.versionName')" header-align="center" align="center">  
             </el-table-column>
-            <el-table-column fixed="right" :label="$t('action.operation')" width="150">
+            <el-table-column fixed="right" :label="$t('action.operation')" width="180">
                 <template slot-scope="scope">
                     <el-button @click="handleRestore(scope.row)" type="primary" size="mini">{{$t('common.restore')}}</el-button>
                     <el-button @click="handleDelete(scope.row)" type="danger" :disabled="scope.row.name=='backup'?true:false" size="mini">{{$t('action.delete')}}</el-button>
@@ -15,7 +15,7 @@
         </el-table>
         <span slot="footer" class="dialog-footer">
             <el-button size="small"  @click="visible = false">{{$t('action.cancel')}}</el-button>
-            <el-button size="small"  type="primary" @click="handleBackup" :loading="backupLoading">{{$t('common.backup')}}</el-button>
+            <el-button size="small"  type="primary" @click="handleBackup">{{$t('common.backup')}}</el-button>
         </span>
 	</el-dialog>
 </template>
@@ -30,7 +30,7 @@ export default {
             showHeader: false,
             visible: true,
             tableLoading: false,
-            backupLoading: false,
+            tableLoading: false,
             baseUrl: this.global.backupBaseUrl
 		}
 	},
@@ -53,7 +53,7 @@ export default {
 		},
 		// 数据备份
 		handleBackup: function () {
-            this.backupLoading = true
+            this.tableLoading = true
             axios.get(this.baseUrl + '/backup/backup').then((res) => {
                 res = res.data
                 if(res.code == 200) {
@@ -61,13 +61,13 @@ export default {
                 } else {
                     this.$message({message: '操作失败, ' + res.msg, type: 'error'})
                 }
-                this.backupLoading = false
+                this.tableLoading = false
 				this.findRecords()
 			})
 		},
 		// 数据还原
 		handleRestore: function (data) {
-            this.backupLoading = true
+            this.tableLoading = true
             axios.get(this.baseUrl + '/backup/restore', {params : {name : data.name }}).then((res) => {
                 res = res.data
                 if(res.code == 200) {
@@ -76,12 +76,12 @@ export default {
                 } else {
                     this.$message({message: '操作失败, ' + res.msg, type: 'error'})
                 }
-                this.backupLoading = false
+                this.tableLoading = false
 			})
 		},
 		// 删除备份
 		handleDelete: function (data) {
-            this.backupLoading = true
+            this.tableLoading = true
             axios.get(this.baseUrl + '/backup/delete', {params : {name : data.name }}).then((res) => {
                 res = res.data
                 if(res.code == 200) {
@@ -90,7 +90,7 @@ export default {
                     this.$message({message: '操作失败, ' + res.msg, type: 'error'})
                 }
                 this.findRecords()
-                this.backupLoading = false
+                this.tableLoading = false
             })
         },
         handleClose(done) {

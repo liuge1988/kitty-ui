@@ -25,7 +25,7 @@
         <el-dropdown-menu slot="dropdown">
           <el-dropdown-item command="msg">{{$t("common.myMsg")}}</el-dropdown-item>
           <el-dropdown-item command="config">{{$t("common.config")}}</el-dropdown-item>
-          <el-dropdown-item command="bakcup">{{$t("common.backup")}}</el-dropdown-item>
+          <el-dropdown-item command="bakcup">{{$t("common.backupRestore")}}</el-dropdown-item>
           <el-dropdown-item divided @click.native="logout">{{$t("common.logout")}}</el-dropdown-item>
         </el-dropdown-menu>
       </el-dropdown>
