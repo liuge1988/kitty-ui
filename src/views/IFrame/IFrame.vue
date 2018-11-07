@@ -1,6 +1,6 @@
 <template>
   <div class="iframe-container">
-    <iframe :src="src" scrolling="auto" frameborder="0" class="frame">
+    <iframe :src="src" scrolling="auto" frameborder="0" class="frame" :onload="onloaded()">
     </iframe>
   </div>
 </template>
@@ -9,27 +9,41 @@
 export default {
   data() {
     return {
-      src: ''
-    }
+      src: "",
+      loading: null
+    };
   },
   methods: {
     // 获取路径
-    resetSrc: function (url) {
+    resetSrc: function(url) {
       this.src = url
+      this.load()
+    },
+    load: function() {
+      this.loading = this.$loading({
+        lock: true,
+        text: "loading...",
+        spinner: "el-icon-loading",
+        background: "rgba(0, 0, 0, 0.5)",
+        target: document.querySelector(".iframe-container")
+      });
+    },
+    onloaded: function() {
+      this.loading.close()
     }
   },
-  mounted(){
-    this.resetSrc(this.$store.state.iframe.iframeUrl)
+  mounted() {
+    this.resetSrc(this.$store.state.iframe.iframeUrl);
   },
   watch: {
     $route: {
-      handler: function (val, oldVal) {
+      handler: function(val, oldVal) {
         // 如果是跳转到嵌套页面，切换iframe的url
-        this.resetSrc(this.$store.state.iframe.iframeUrl)
+        this.resetSrc(this.$store.state.iframe.iframeUrl);
       }
     }
   }
-}
+};
 </script>
 
 <style lang="scss">
