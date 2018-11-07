@@ -7,7 +7,8 @@
       <el-table-column type="selection" width="40" v-if="showBatchDelete & showOperation"></el-table-column>
       <el-table-column v-for="column in columns" header-align="center" align="center"
         :prop="column.prop" :label="column.label" :width="column.width" :min-width="column.minWidth" 
-        :fixed="column.fixed" :key="column.prop" :type="column.type" :sortable="column.sortable==null?true:column.sortable">
+        :fixed="column.fixed" :key="column.prop" :type="column.type" :formatter="column.formatter"
+        :sortable="column.sortable==null?true:column.sortable">
       </el-table-column>
       <el-table-column :label="$t('action.operation')" width="180" fixed="right" v-if="showOperation" header-align="center" align="center">
         <template slot-scope="scope">

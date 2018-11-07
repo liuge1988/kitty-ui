@@ -69,6 +69,7 @@
 import PopupTreeInput from "@/components/PopupTreeInput"
 import KtTable from "@/views/Core/KtTable"
 import KtButton from "@/views/Core/KtButton"
+import { format } from "@/utils/datetime"
 export default {
 	components:{
 		PopupTreeInput,
@@ -90,9 +91,9 @@ export default {
 				{prop:"mobile", label:"手机", minWidth:100},
 				{prop:"status", label:"状态", minWidth:70},
 				// {prop:"createBy", label:"创建人", minWidth:120},
-				// {prop:"createTime", label:"创建时间", minWidth:190}
+				// {prop:"createTime", label:"创建时间", minWidth:120, formatter:this.dateFormat}
 				// {prop:"lastUpdateBy", label:"更新人", minWidth:100},
-				// {prop:"lastUpdateTime", label:"更新时间", minWidth:120}
+				// {prop:"lastUpdateTime", label:"更新时间", minWidth:120, formatter:this.dateFormat}
 			],
 			pageRequest: { pageNum: 1, pageSize: 8 },
 			pageResult: {},
@@ -216,7 +217,11 @@ export default {
       	deptTreeCurrentChangeHandle (data, node) {
         	this.dataForm.deptId = data.id
         	this.dataForm.deptName = data.name
-		}
+		},
+		// 时间格式化
+      	dateFormat: function (row, column, cellValue, index){
+          	return format(row[column.property])
+      	}
 	},
 	mounted() {
 		this.findDeptTree()

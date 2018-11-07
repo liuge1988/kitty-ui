@@ -55,6 +55,7 @@
 <script>
 import KtTable from "@/views/Core/KtTable"
 import KtButton from "@/views/Core/KtButton"
+import { format } from "@/utils/datetime"
 export default {
 	components:{
 			KtTable,
@@ -75,9 +76,9 @@ export default {
 				{prop:"description", label:"描述", minWidth:120},
 				{prop:"remarks", label:"备注", minWidth:120},
 				{prop:"createBy", label:"创建人", minWidth:100},
-				{prop:"createTime", label:"创建时间", minWidth:190}
+				{prop:"createTime", label:"创建时间", minWidth:120, formatter:this.dateFormat}
 				// {prop:"lastUpdateBy", label:"更新人", minWidth:100},
-				// {prop:"lastUpdateTime", label:"更新时间", minWidth:120}
+				// {prop:"lastUpdateTime", label:"更新时间", minWidth:120, formatter:this.dateFormat}
 			],
 			pageRequest: { pageNum: 1, pageSize: 8 },
 			pageResult: {},
@@ -158,7 +159,11 @@ export default {
 					})
 				}
 			})
-		}
+		},
+		// 时间格式化
+      	dateFormat: function (row, column, cellValue, index){
+          	return format(row[column.property])
+      	}
 	},
 	mounted() {
 	}

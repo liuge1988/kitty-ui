@@ -33,7 +33,7 @@
         prop="createBy" header-align="center" align="center" label="创建人">
       </el-table-column>
       <el-table-column
-        prop="createTime" header-align="center" align="center" label="创建时间">
+        prop="createTime" header-align="center" align="center" label="创建时间" :formatter="dateFormat">
       </el-table-column>
       <el-table-column
         fixed="right" header-align="center" align="center" width="180" :label="$t('action.operation')">
@@ -73,6 +73,7 @@ import KtButton from "@/views/Core/KtButton"
 import TableTreeColumn from '@/views/Core/TableTreeColumn'
 import PopupTreeInput from "@/components/PopupTreeInput"
 import FaIconTooltip from "@/components/FaIconTooltip"
+import { format } from "@/utils/datetime"
 export default {
 	components:{
     PopupTreeInput,
@@ -194,7 +195,12 @@ export default {
 					})
 				}
       })
+    },
+		// 时间格式化
+    dateFormat: function (row, column, cellValue, index){
+      return format(row[column.property])
     }
+    
 	},
 	mounted() {
     this.findTreeData()
