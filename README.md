@@ -55,11 +55,11 @@ QQ技术交流群： 429854222
 - ✔ 主题切换：支持主题切换，自定主题颜色，一键换肤
 - ✔ 服务治理：集成Consul注册中心，实现服务注册和发现
 - ✔ 服务监控：集成Spring Boot Admin，实现服务监控
-- ✘ 服务消费：集成Ribbon、Feign，服务调用和负载均衡
-- ✘ 服务网关：集成Spring Cloud Zuul，实现API网关
-- ✘ 服务熔断：集成Hystrix、Turbine，实现熔断和监控
-- ✘ 链路追踪：集成Sleuth、Zipkin，实现分布式链路追踪
-- ✘ 配置中心：集成Config、Bus，实现分布式配置中心
+- ✔ 服务消费：集成Ribbon、Feign，服务调用和负载均衡
+- ✔ 服务熔断：集成Hystrix、Turbine，实现熔断和监控
+- ✔ 服务网关：集成Spring Cloud Zuul，实现API网关
+- ✔ 链路追踪：集成Sleuth、Zipkin，实现分布式链路追踪
+- ✔ 配置中心：集成Config、Bus，实现分布式配置中心
 - ✘ 单点登录：利用 OAuth2, 提供统一的单点登录功能
 - ✘ 系统登录：集成第三方登录功能（QQ、微信、微博）
 - ✘ 代码生成：提供代码生成器，最大化的降低代码开发量
@@ -88,11 +88,21 @@ QQ技术交流群： 429854222
 
 ##### 项目结构
 
-- kitty-common： 公共代码模块，主要放置工具类
+- kitty-common： 公共代码模块，主要放置一些工具类
 - kitty-core： 核心代码模块，主要封装公共业务模块
 - kitty-admin： 后台管理模块，包含用户、角色、菜单管理等
 - kitty-backup： 系统数据备份备份模块，可选择独立部署
 - kitty-monitor： 系统监控服务端，监控Spring Boot服务模块
+
+- kitty-producer： 服务提供者示例，方便在此基础上搭建模块
+- kitty-consumer： 服务消费者示例，方便在此基础上搭建模块
+- kitty-hystrix： 服务熔断监控模块，收集汇总熔断统计信息
+- kitty-zuul： API服务网关模块，统一管理和转发外部调用请求
+- kitty-config： 配置中心服务端，生成GIT配置文件的访问接口
+
+- kitty-consul： 注册中心，安装说明目录，内附安装引导说明
+- kitty-zipkin： 链路追踪，安装说明目录，内附安装引导说明
+- config-repo： 配置中心仓库，在GIT上统一存储系统配置文件
 - kitty-pom： 聚合模块，仅为简化打包，一键执行打包所有模块
 
 #### 前端架构
@@ -125,14 +135,9 @@ kitty-ui
 - utils： 工具模块，提供一些通用的工具方法
 - views： 页面模块，主要放置各种页面视图组件
 
-
 ### 安装教程
 
 #### 后端安装
-
-Spring Coud 分支（dev，master）使用 Consul 作为注册中心，Consul 安装教程参考：
-
-[Spring Boot + Spring Cloud 实现权限管理系统 后端篇（十八）：服务注册和发现（Consul）](https://www.cnblogs.com/xifengxiaoma/p/9857996.html)
 
 1. 下载源码
 
@@ -157,16 +162,28 @@ Spring Coud 分支（dev，master）使用 Consul 作为注册中心，Consul �
     修改 kitty-backup 下 application.yml 中的数据库连接和账号密码为自己的数据库配置。
 
 5. 启动系统
+
+    基础必需模块（注册中心：kitty-consul，服务监控：kitty-monitor）
     
-    找到 Consul 注册中心安装目录，执行 consul agent -dev 启动注册中心，不了解请先百度。
+    找到 kitty-consul 工程，根据安装说明安装注册中心，完成后执行 consul agent -dev 启动。
 
-    找到 kitty-monitor 工程下的 KittyMonitorApplication, 执行 Java 程序，启动项目。
+    找到 kitty-monitor 工程下的 KittyMonitorApplication， 启动项目，开启服务监控。
 
-    找到 kitty-admin 工程下的 KittyAdminApplication, 执行 Java 程序，启动项目。
+    权限管理模块（权限管理：kitty-admin，备份还原：kitty-backup）
 
-    找到 kitty-backup 工程下的 KittyBackupApplication.java, 执行 Java 程序，启动项目。
+    找到 kitty-admin 工程下的 KittyAdminApplication， 启动项目，开启权限管理系统服务。
+
+    找到 kitty-backup 工程下的 KittyBackupApplication.java，启动项目，开启备份还原服务。
+
+
+    其他模块根据各自需要选择性启动，模块依赖可以参见我的博客同步教程...
+
+    注意事项：
+
+    如果需要链路追踪服务，需要安装zipkin，找到 kitty-zipkin 工程，根据安装说明安装zipkin。
+
+    如果需要配置中心服务，需要安装rabbitMQ，找到 kitty-config 工程，根据安装说明安装rabbitMQ。
     
-    注意：注册中心和监控服务器 monitor 要先启动，其他无所谓。
 
 #### 前端安装
 
@@ -190,53 +207,55 @@ Spring Coud 分支（dev，master）使用 Consul 作为注册中心，Consul �
 
     通过修改src/mock/index.js中的openMock变量，可以一键开启或关闭Mock功能。
 
-6.修改配置
+6. 修改配置
 
     如果想自定义端口（默认是8090），可以修改 config/index.js 下的 port 属性。
 
     后台接口和备份服务器地址配置在 src/utils/global.js，如有修改请做相应变更。
+
+
     
-#### 系统展示
+### 系统展示
 
-##### 登录界面
+#### 登录界面
 
-![输入图片说明](https://images.gitee.com/uploads/images/2018/1011/172530_fd14977c_645970.png "屏幕截图.png")
+![输入图片说明](https://images.gitee.com/uploads/images/2018/1108/172409_422532b0_645970.png "屏幕截图.png")
 
-##### 用户管理
+#### 用户管理
 
 ![输入图片说明](https://images.gitee.com/uploads/images/2018/1011/172505_51c77c5a_645970.png "屏幕截图.png")
 
-##### 机构管理
+#### 机构管理
 
 ![输入图片说明](https://images.gitee.com/uploads/images/2018/1011/172625_e0e99bc7_645970.png "屏幕截图.png")
 
-##### 角色管理
+#### 角色管理
 
 ![输入图片说明](https://images.gitee.com/uploads/images/2018/1011/172658_1b438eb2_645970.png "屏幕截图.png")
 
-##### 菜单管理
+#### 菜单管理
 
 ![输入图片说明](https://images.gitee.com/uploads/images/2018/1011/172716_7a5a26a9_645970.png "屏幕截图.png")
 
-##### 字典管理
+#### 字典管理
 
 ![输入图片说明](https://images.gitee.com/uploads/images/2018/1011/172729_4fd54dbe_645970.png "屏幕截图.png")
 
-##### 系统日志
+#### 系统日志
 
 ![输入图片说明](https://images.gitee.com/uploads/images/2018/1011/172747_719d67a0_645970.png "屏幕截图.png")
 
-##### 系统监控
+#### 系统监控
 
 用户名：admin, 密码:admin，即服务端配置的密码
 
 ![输入图片说明](https://images.gitee.com/uploads/images/2018/1011/172830_5e3e1daa_645970.png "屏幕截图.png")
 
-##### 接口文档
+#### 接口文档
 
 ![输入图片说明](https://images.gitee.com/uploads/images/2018/1011/172928_f63c7f63_645970.png "屏幕截图.png")
 
-##### 主题切换
+#### 主题切换
 
 ![输入图片说明](https://images.gitee.com/uploads/images/2018/1011/173415_ef0dc20b_645970.png "屏幕截图.png")
 
