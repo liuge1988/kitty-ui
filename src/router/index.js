@@ -4,6 +4,7 @@ import Login from '@/views/Login'
 import NotFound from '@/views/Error/404'
 import Home from '@/views/Home'
 import Intro from '@/views/Intro/Intro'
+import Generator from '@/views/Generator/Generator'
 import api from '@/http/api'
 import store from '@/store'
 import { getIFramePath, getIFrameUrl } from '@/utils/iframe'
@@ -21,6 +22,11 @@ const router = new Router({
           path: '', 
           name: '系统介绍', 
           component: Intro 
+        },
+        { 
+          path: '/generator/generator', 
+          name: '代码生成', 
+          component: Generator 
         }
       ]
     },

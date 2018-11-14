@@ -67,9 +67,10 @@ export default {
         float: left;
     }
     div {
-      font-size: 22px;
+      font-size: 25px;
       color: white;
       text-align: left;
+      padding-left: 20px;
     }
   }
   .menu-bar-width {

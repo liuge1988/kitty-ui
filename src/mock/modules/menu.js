@@ -280,6 +280,24 @@ export function findNavTree() {
         "parentName": "",
         "level": 0,
         "children": []
+      },
+      {
+        "id": 102,
+        "createBy": null,
+        "createTime": null,
+        "lastUpdateBy": null,
+        "lastUpdateTime": null,
+        "parentId": 0,
+        "name": "代码生成",
+        "url": "/generator/generator",
+        "perms": "",
+        "type": 1,
+        "icon": "el-icon-mobile-phone",
+        "orderNum": 7,
+        "delFlag": 0,
+        "parentName": "",
+        "level": 0,
+        "children": []
       }
     ]
   }
@@ -925,6 +943,24 @@ export function findMenuTree() {
         "parentId": 0,
         "name": "接口文档",
         "url": "iframe:/swagger-ui.html",
+        "perms": "",
+        "type": 1,
+        "icon": "el-icon-tickets",
+        "orderNum": 7,
+        "delFlag": 0,
+        "parentName": "",
+        "level": 0,
+        "children": []
+      },
+      {
+        "id": 102,
+        "createBy": null,
+        "createTime": null,
+        "lastUpdateBy": null,
+        "lastUpdateTime": null,
+        "parentId": 0,
+        "name": "代码生成",
+        "url": "/generator/generator",
         "perms": "",
         "type": 1,
         "icon": "el-icon-tickets",
