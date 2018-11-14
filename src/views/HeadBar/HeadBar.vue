@@ -108,7 +108,7 @@ export default {
     }
   },
   mounted() {
-    this.sysName = "I like Kitty"
+    this.sysName = "Kitty Platform"
     var user = sessionStorage.getItem("user")
     if (user) {
       this.userName = user
