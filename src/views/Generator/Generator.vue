@@ -13,7 +13,7 @@
         <span>1.配置数据源</span>
       </div>
       <div  class="image">
-        <img src="https://images.gitee.com/uploads/images/2018/1114/180317_ca91ceb2_645970.png" />
+        <img class="usageImage" src="https://images.gitee.com/uploads/images/2018/1114/180145_1b395632_645970.png" />
       </div>
     </div>
     <div>
@@ -21,7 +21,7 @@
         <span>2.选择数据库表</span>
       </div>
       <div class="image">
-        <img src="https://images.gitee.com/uploads/images/2018/1114/180317_ca91ceb2_645970.png" />
+        <img class="usageImage" src="https://images.gitee.com/uploads/images/2018/1114/180317_ca91ceb2_645970.png" />
       </div>
     </div>
     <div>
@@ -29,7 +29,7 @@
         <span>3.编辑信息，生成代码</span>
       </div>
       <div  class="image">
-        <img src="https://images.gitee.com/uploads/images/2018/1114/180642_2c4f986d_645970.png" />
+        <img class="usageImage" src="https://images.gitee.com/uploads/images/2018/1114/180642_2c4f986d_645970.png" />
       </div>
     </div>
   </div>
@@ -66,7 +66,7 @@ export default {
   text-align: left;
   padding: 10px;
 }
-img {
+.usageImage {
   
   width: 1000px;
   height: 580px;
