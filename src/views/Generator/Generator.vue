@@ -69,6 +69,6 @@ export default {
 .usageImage {
   
   width: 1000px;
-  height: 580px;
+  height: 500px;
 }
 </style>
