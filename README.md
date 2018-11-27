@@ -26,11 +26,13 @@ QQ技术交流群： 429854222
 
 ### 分支说明
 
-- master: 主推版本分支，支持分布式，服务治理（Spring Cloud）
+- master: 主推版本分支，支持分布式，服务治理（Spring Security + Spring Cloud）
 
-- dev: 开发分支，适时合并到master分支，支持分布式，服务治理（Spring Cloud）
+- dev: 开发分支，适时合并到master分支，支持分布式，服务治理（Spring Security + Spring Cloud）
 
-- shiro: 基于Spring Boot，不包含 Spring Cloud，部署环境稍微简单一点
+- shiro-cloud: 基于Spring Boot + Shiro + Spring Cloud，支持分布式、服务治理
+
+- shiro: 基于Spring Boot + Shiro，不包含 Spring Cloud，部署环境稍微简单一点
 
 ### 项目介绍
 
@@ -87,7 +89,7 @@ QQ技术交流群： 429854222
 
 - 核心框架：Spring Boot 2.x
 - 服务治理：Spring Cloud Finchley
-- 安全框架：Apache Shiro 1.4.x
+- 安全框架：Spring Security 5.x
 - 视图框架：Spring MVC 5.x
 - 持久层框架：MyBatis 3.x
 - 数据库连接池：Druid 1.x
