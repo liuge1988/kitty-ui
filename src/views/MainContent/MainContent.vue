@@ -1,10 +1,12 @@
 <template>
-  <div class="container" :class="$store.state.app.collapse?'menu-bar-collapse-width':'menu-bar-width'">
+  <div id="main-container" class="container" :class="$store.state.app.collapse?'menu-bar-collapse-width':'menu-bar-width'">
     <!-- 标签页 -->
     <el-tabs v-model="mainTabsActiveName" :closable="true"
       @tab-click="selectedTabHandle" @tab-remove="removeTabHandle">
-      <el-dropdown class="tabs-tools" :show-timeout="0">
-        <i class="el-icon-arrow-down"></i>
+      <el-dropdown class="tabs-tools" :show-timeout="0" trigger="click">
+        <el-button class="tabs-tools">
+          关闭标签 <i class="el-icon-arrow-down"></i>
+        </el-button>
         <el-dropdown-menu slot="dropdown">
           <el-dropdown-item @click.native="tabsCloseCurrentHandle">关闭当前标签页</el-dropdown-item>
           <el-dropdown-item @click.native="tabsCloseOtherHandle">关闭其它标签页</el-dropdown-item>
@@ -99,9 +101,10 @@ export default {
     position: fixed;
     top: 60px;
     right: 0;
+    // z-index: 500;
     height: 40px;
-    padding: 0 12px;
-    font-size: 18px;
+    padding: 0 10px;
+    font-size: 14px;
     line-height: 40px;
     cursor: pointer;
   }

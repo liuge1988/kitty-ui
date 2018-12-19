@@ -1,5 +1,5 @@
 <template>
-  <div class="iframe-container">
+  <div class="iframe-container" style="width:99%;margin-top:-15px;">
     <iframe :src="src" scrolling="auto" frameborder="0" class="frame" :onload="onloaded()">
     </iframe>
   </div>
@@ -20,13 +20,14 @@ export default {
       this.load()
     },
     load: function() {
-      this.loading = this.$loading({
+      this.loading = this.$loading({  
         lock: true,
         text: "loading...",
         spinner: "el-icon-loading",
         background: "rgba(0, 0, 0, 0.5)",
-        target: document.querySelector(".iframe-container")
-      });
+        // fullscreen: false,
+        target: document.querySelector("#main-container ")
+      })
     },
     onloaded: function() {
       this.loading.close()
@@ -50,13 +51,8 @@ export default {
 .iframe-container {
   position: absolute;
   top: 60px;
-  left: 0px;
-  right: 0px;
   bottom: 0px;
-  margin-top: -29px;
   .frame {
-    position: relative;
-    top: 0px;
     width: 100%;
     height: 100%;
   }
