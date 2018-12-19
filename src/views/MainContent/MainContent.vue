@@ -101,7 +101,7 @@ export default {
     position: fixed;
     top: 60px;
     right: 0;
-    // z-index: 500;
+    z-index: 500;
     height: 40px;
     padding: 0 10px;
     font-size: 14px;
