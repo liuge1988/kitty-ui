@@ -38,17 +38,19 @@ export function findDeptTree(params) {
     let obj = {}
     obj.id   = i + 1
     obj.parentId   = 0
-    obj.name = 'dept  ' + obj.id
+    obj.name = '机构部门  ' + obj.id
+    obj.parentName = "顶级机构"
     obj.children = []
     content.push(obj)
   }
   for(let i=0; i<content.length; i++) {
     let parent = content[i]
-    for(let i=0; i<5; i++) {
+    for(let j=0; j<5; j++) {
       let obj = {}
-      obj.id   = i + 1 + (i * parent.id)
-      obj.parentId   = parent.id
-      obj.name = 'dept  ' + obj.id
+      obj.id = (i + 1) + "" + (j + 1)
+      obj.parentId = parent.id
+      obj.parentName = parent.name
+      obj.name = '机构部门  ' + (i + 1) + "-" + (j + 1)
       parent.children.push(obj)
     }
   }

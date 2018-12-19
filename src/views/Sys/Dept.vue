@@ -117,7 +117,7 @@ export default {
     findTreeData: function () {
       this.loading = true
 			this.$api.dept.findDeptTree().then((res) => {
-        this.tableTreeDdata = res.data
+        this.tableTreeDdata = res.data.content
         this.popupTreeData = this.getParentMenuTree(res.data)
         this.loading = false
 			})
