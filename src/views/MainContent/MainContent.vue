@@ -99,20 +99,25 @@ export default {
   padding: 0 5px 5px;
   position: absolute;
   top: 60px;
-  left: 0px;
-  right: 0px;
+  left: 1px;
+  right: 1px;
   bottom: 0px;
   // background: rgba(56, 5, 114, 0.5);
   .tabs {
     position: fixed;
     top: 60px;
-    right: 0px;
-    padding-left: 0px;
+    right: 50px;
+    padding-left: 2px;
+    padding-right: 2px;
     z-index: 1020;
     height: 40px;
     line-height: 40px;
     font-size: 14px;
     background: rgb(255, 253, 255);
+        border-color: rgba(200, 206, 206, 0.5);
+    border-left-width: 1px;
+    border-left-style: solid;
+
   }
  .tabs-tools {
     position: fixed;
@@ -124,6 +129,11 @@ export default {
     font-size: 14px;
     line-height: 40px;
     cursor: pointer;
+    border-color: rgba(200, 206, 206, 0.5);
+    border-left-width: 1px;
+    border-left-style: solid;
+    border-bottom-width: 1px;
+    border-bottom-style: solid;
   }
   .main-content {
     position: absolute;
