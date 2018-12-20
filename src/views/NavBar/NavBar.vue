@@ -7,7 +7,8 @@
     </div>
     <!-- 导航菜单 -->
     <el-menu default-active="1" :class="collapse?'menu-bar-collapse-width':'menu-bar-width'"
-      :collapse="collapse" @open="handleopen" @close="handleclose" @select="handleselect">
+      :collapse="collapse" :collapse-transition="false" :unique-opened="true  "
+      @open="handleopen" @close="handleclose" @select="handleselect">
       <!-- 导航菜单树组件，动态加载菜单 -->
       <menu-tree v-for="item in navTree" :key="item.id" :menu="item"></menu-tree>
     </el-menu>
@@ -72,6 +73,11 @@ export default {
 
 <style scoped lang="scss">
 .menu-bar-container {
+  position: fixed;
+  top: 0px;
+  left: 0;
+  bottom: 0;
+  z-index: 1020;
   .el-menu {
     position:absolute;
     top: 60px;

@@ -1,29 +1,34 @@
 <template>
-  <div id="main-container" class="container" :class="$store.state.app.collapse?'menu-bar-collapse-width':'menu-bar-width'">
+  <div id="main-container" class="main-container" :class="$store.state.app.collapse?'position-collapse-left':'position-left'">
     <!-- 标签页 -->
-    <el-tabs v-model="mainTabsActiveName" :closable="true"
-      @tab-click="selectedTabHandle" @tab-remove="removeTabHandle">
-      <el-dropdown class="tabs-tools" :show-timeout="0" trigger="click">
-        <el-button class="tabs-tools">
-          关闭标签 <i class="el-icon-arrow-down"></i>
-        </el-button>
-        <el-dropdown-menu slot="dropdown">
-          <el-dropdown-item @click.native="tabsCloseCurrentHandle">关闭当前标签页</el-dropdown-item>
-          <el-dropdown-item @click.native="tabsCloseOtherHandle">关闭其它标签页</el-dropdown-item>
-          <el-dropdown-item @click.native="tabsCloseAllHandle">关闭全部标签页</el-dropdown-item>
-          <el-dropdown-item @click.native="tabsRefreshCurrentHandle">刷新当前标签页</el-dropdown-item>
-        </el-dropdown-menu>
-      </el-dropdown>
-      <el-tab-pane v-for="item in mainTabs"
-        :key="item.name" :label="item.title" :name="item.name">
-      </el-tab-pane>
-    </el-tabs>
+    <div class="tab-container">
+      <el-tabs class="tabs" :class="$store.state.app.collapse?'position-collapse-left':'position-left'"
+        v-model="mainTabsActiveName" :closable="true"
+        @tab-click="selectedTabHandle" @tab-remove="removeTabHandle">
+        <el-dropdown class="tabs-tools" :show-timeout="0" trigger="click">
+          <el-button class="tabs-tools">
+            关闭标签 <i class="el-icon-arrow-down"></i>
+          </el-button>
+          <el-dropdown-menu slot="dropdown">
+            <el-dropdown-item @click.native="tabsCloseCurrentHandle">关闭当前标签页</el-dropdown-item>
+            <el-dropdown-item @click.native="tabsCloseOtherHandle">关闭其它标签页</el-dropdown-item>
+            <el-dropdown-item @click.native="tabsCloseAllHandle">关闭全部标签页</el-dropdown-item>
+            <el-dropdown-item @click.native="tabsRefreshCurrentHandle">刷新当前标签页</el-dropdown-item>
+          </el-dropdown-menu>
+        </el-dropdown>
+        <el-tab-pane v-for="item in mainTabs"
+          :key="item.name" :label="item.title" :name="item.name">
+        </el-tab-pane>
+      </el-tabs>
+    </div>
     <!-- 主内容区域 -->
-    <keep-alive>
-      <transition name="fade" mode="out-in">
-          <router-view class="content"></router-view>
-      </transition>
-    </keep-alive>
+    <div class="main-content">
+      <keep-alive>
+        <transition name="fade" mode="out-in">
+            <router-view></router-view>
+        </transition>
+      </keep-alive>
+    </div>
   </div>
 </template>
 
@@ -91,32 +96,49 @@ export default {
 </script>
 
 <style scoped lang="scss">
-.container {
-  padding: 0 8px 8px;
+.main-container {
+  padding: 0 5px 5px;
   position: absolute;
   top: 60px;
   left: 0px;
+  right: 0px;
+  bottom: 0px;
   // background: rgba(56, 5, 114, 0.5);
+  .tabs {
+    position: fixed;
+    top: 60px;
+    right: 0px;
+    padding-left: 10px;
+    z-index: 1020;
+    height: 40px;
+    line-height: 40px;
+    font-size: 14px;
+  }
  .tabs-tools {
     position: fixed;
     top: 60px;
     right: 0;
-    z-index: 500;
-    height: 40px;
+    z-index: 1020;
+    height: 39px;
     padding: 0 10px;
     font-size: 14px;
     line-height: 40px;
     cursor: pointer;
   }
-  .content {
-    margin-bottom: 5px;
+  .main-content {
+    position: absolute;
+    top: 45px;
+    left: 5px;
+    right: 5px;
+    bottom: 5px;
+    padding: 5px;
     // background: rgba(209, 212, 212, 0.5);
   }
 }
-.menu-bar-width {
+.position-left {
   left: 200px;
 }
-.menu-bar-collapse-width {
+.position-collapse-left {
   left: 65px;
 }
 </style>

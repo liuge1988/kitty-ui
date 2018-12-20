@@ -1,5 +1,5 @@
 <template>
-  <div class="iframe-container" style="width:99%;margin-top:-15px;">
+  <div class="iframe-container">
     <iframe :src="src" scrolling="auto" frameborder="0" class="frame" :onload="onloaded()">
     </iframe>
   </div>
@@ -30,7 +30,9 @@ export default {
       })
     },
     onloaded: function() {
-      this.loading.close()
+      if(this.loading) {
+        this.loading.close()
+      }
     }
   },
   mounted() {
@@ -50,7 +52,9 @@ export default {
 <style lang="scss">
 .iframe-container {
   position: absolute;
-  top: 60px;
+  top: 0px;
+  left: 0px;
+  right: 0px;;
   bottom: 0px;
   .frame {
     width: 100%;

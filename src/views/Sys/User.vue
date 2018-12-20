@@ -1,5 +1,5 @@
 <template>
-  <div class="container" style="width:99%;margin-top:-15px;">
+  <div class="page-container">
 	<!--工具栏-->
 	<div class="toolbar" style="float:left;padding-top:10px;padding-left:15px;">
 		<el-form :inline="true" :model="filters" :size="size">
@@ -95,7 +95,7 @@ export default {
 				// {prop:"lastUpdateBy", label:"更新人", minWidth:100},
 				// {prop:"lastUpdateTime", label:"更新时间", minWidth:120, formatter:this.dateFormat}
 			],
-			pageRequest: { pageNum: 1, pageSize: 8 },
+			pageRequest: { pageNum: 1, pageSize: 10 },
 			pageResult: {},
 
 			operation: false, // true:新增, false:编辑
