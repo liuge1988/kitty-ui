@@ -21,12 +21,18 @@ const router = new Router({
         { 
           path: '', 
           name: '系统介绍', 
-          component: Intro 
+          component: Intro,
+          meta: {
+            icon: 'fa fa-home fa-lg'
+          }
         },
         { 
           path: '/generator/generator', 
           name: '代码生成', 
-          component: Generator 
+          component: Generator,
+          meta: {
+            icon: 'el-icon-mobile-phone'
+          } 
         }
       ]
     },
@@ -129,7 +135,10 @@ function addDynamicRoutes (menuList = [], routes = []) {
       var route = {
         path: menuList[i].url,
         component: null,
-        name: menuList[i].name
+        name: menuList[i].name,
+        meta: {
+          icon: menuList[i].icon
+        }
       }
       let path = getIFramePath(menuList[i].url)
       if (path) {

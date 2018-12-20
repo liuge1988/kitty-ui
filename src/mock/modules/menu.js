@@ -963,7 +963,7 @@ export function findMenuTree() {
         "url": "/generator/generator",
         "perms": "",
         "type": 1,
-        "icon": "el-icon-tickets",
+        "icon": "el-icon-mobile-phone",
         "orderNum": 7,
         "delFlag": 0,
         "parentName": "",
