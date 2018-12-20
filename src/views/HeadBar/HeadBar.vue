@@ -2,8 +2,10 @@
   <div class="headbar-container" :style="{'background':themeColor}" 
     :class="$store.state.app.collapse?'position-collapse-left':'position-left'">
     <!-- 导航收缩 -->
-    <span class="hamburger-container" :style="{'background':themeColor}">
-      <hamburger :onClick="onCollapse" :isActive="collapse"></hamburger>
+    <span class="hamburger-container">
+      <el-menu class="el-menu-demo" :background-color="themeColor" text-color="#fff" :active-text-color="themeColor" mode="horizontal">
+        <el-menu-item index="1" @click="onCollapse"><hamburger :isActive="collapse"></hamburger></el-menu-item>
+      </el-menu>
     </span>
     <!-- 导航菜单 -->
     <span class="nav-bar">
@@ -138,23 +140,9 @@ export default {
   border-left-style: solid;
   .hamburger-container {
     float: left;
-    color: white;
-    width: 30px;
-    height: 34px;
-    border-radius: 5px;
-    padding-bottom: 12px;
-    margin-top: 5px;
-    margin-left: 5px;
-    // border-color: rgba(71, 187, 187, 0.5);
-    // border-width: 1px;
-    // border-style: solid;
   }
   .nav-bar {
-    margin-left: 10px;
     float: left;
-    .el-menu {
-      background: #0a463480;
-    }
   }
   .tool-bar {
     float: right;

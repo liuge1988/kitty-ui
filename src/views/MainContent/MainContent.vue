@@ -6,7 +6,7 @@
         v-model="mainTabsActiveName" :closable="true" type="card"
         @tab-click="selectedTabHandle" @tab-remove="removeTabHandle">
         <el-dropdown class="tabs-tools" :show-timeout="0" trigger="hover">
-            <span style="font-size:20px;padding-right:10px;"><i class="el-icon-arrow-down"> </i></span>
+          <div style="font-size:20px;width:50px;"><i class="el-icon-arrow-down"></i></div>
           <el-dropdown-menu slot="dropdown">
             <el-dropdown-item @click.native="tabsCloseCurrentHandle">关闭当前标签页</el-dropdown-item>
             <el-dropdown-item @click.native="tabsCloseOtherHandle">关闭其它标签页</el-dropdown-item>
@@ -108,16 +108,17 @@ export default {
     top: 60px;
     right: 50px;
     padding-left: 2px;
-    padding-right: 2px;
+    padding-right: 5px;
     z-index: 1020;
     height: 40px;
     line-height: 40px;
     font-size: 14px;
     background: rgb(255, 253, 255);
-        border-color: rgba(200, 206, 206, 0.5);
+    border-color: rgba(200, 206, 206, 0.5);
     border-left-width: 1px;
     border-left-style: solid;
-
+    border-bottom-width: 1px;
+    border-bottom-style: solid;
   }
  .tabs-tools {
     position: fixed;
@@ -125,7 +126,7 @@ export default {
     right: 0;
     z-index: 1020;
     height: 40px;
-    padding: 0 10px;
+    // padding: 0 10px;
     font-size: 14px;
     line-height: 40px;
     cursor: pointer;
@@ -134,6 +135,9 @@ export default {
     border-left-style: solid;
     border-bottom-width: 1px;
     border-bottom-style: solid;
+  }
+  .tabs-tools :hover {
+    background: rgba(200, 206, 206, 0.5);
   }
   .main-content {
     position: absolute;
