@@ -3,12 +3,10 @@
     <!-- 标签页 -->
     <div class="tab-container">
       <el-tabs class="tabs" :class="$store.state.app.collapse?'position-collapse-left':'position-left'"
-        v-model="mainTabsActiveName" :closable="true"
+        v-model="mainTabsActiveName" :closable="true" type="card"
         @tab-click="selectedTabHandle" @tab-remove="removeTabHandle">
-        <el-dropdown class="tabs-tools" :show-timeout="0" trigger="click">
-          <el-button class="tabs-tools">
-            关闭标签 <i class="el-icon-arrow-down"></i>
-          </el-button>
+        <el-dropdown class="tabs-tools" :show-timeout="0" trigger="hover">
+            <span style="font-size:20px;padding-right:10px;"><i class="el-icon-arrow-down"> </i></span>
           <el-dropdown-menu slot="dropdown">
             <el-dropdown-item @click.native="tabsCloseCurrentHandle">关闭当前标签页</el-dropdown-item>
             <el-dropdown-item @click.native="tabsCloseOtherHandle">关闭其它标签页</el-dropdown-item>
@@ -108,18 +106,19 @@ export default {
     position: fixed;
     top: 60px;
     right: 0px;
-    padding-left: 10px;
+    padding-left: 0px;
     z-index: 1020;
     height: 40px;
     line-height: 40px;
     font-size: 14px;
+    background: rgb(255, 253, 255);
   }
  .tabs-tools {
     position: fixed;
     top: 60px;
     right: 0;
     z-index: 1020;
-    height: 39px;
+    height: 40px;
     padding: 0 10px;
     font-size: 14px;
     line-height: 40px;
