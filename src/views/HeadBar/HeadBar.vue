@@ -27,22 +27,39 @@
         <el-menu-item index="2" v-popover:popover-lang>
           <!-- 语言切换 -->
           <li style="color:#fff;" class="fa fa-language fa-lg"></li>
-          <el-popover ref="popover-lang" placement="bottom-start" trigger="hover" v-model="langVisible">
+          <el-popover ref="popover-lang" placement="bottom-start" trigger="click" v-model="langVisible">
             <div class="lang-item" @click="changeLanguage('zh_cn')">简体中文</div>
             <div class="lang-item" @click="changeLanguage('en_us')">English</div>
           </el-popover>
         </el-menu-item>
-        <el-menu-item index="3">
+        <el-menu-item index="2" @click="handleBackup">
+          <!-- 备份还原 -->
+          <li style="color:#fff;" class="fa fa-archive fa-lg"></li>
+        </el-menu-item>
+        <el-menu-item index="3" v-popover:popover-message>
+          <!-- 我的私信 -->
+          <el-badge :value="5" :max="99" class="badge" type="success">
+            <li style="color:#fff;" class="fa fa-envelope-o fa-lg"></li>
+          </el-badge>
+          <el-popover ref="popover-message" placement="bottom-end" trigger="click">
+            <message-panel></message-panel>
+          </el-popover>
+        </el-menu-item>
+        <el-menu-item index="4" v-popover:popover-notice>
+          <!-- 系统通知 -->
+          <el-badge :value="4" :max="99" class="badge" type="success">
+            <li style="color:#fff;" class="fa fa-bell-o fa-lg"></li>
+          </el-badge>
+          <el-popover ref="popover-notice" placement="bottom-end" trigger="click">
+            <notice-panel></notice-panel>
+          </el-popover>
+        </el-menu-item>
+        <el-menu-item index="5" v-popover:popover-personal>
           <!-- 用户信息 -->
-          <el-dropdown class="user-info" trigger="hover" @command="handleCommand">
-            <span class="el-dropdown-link"><img :src="this.userAvatar" />{{userName}}</span>
-            <el-dropdown-menu slot="dropdown">
-              <el-dropdown-item command="msg">{{$t("common.myMsg")}}</el-dropdown-item>
-              <el-dropdown-item command="config">{{$t("common.config")}}</el-dropdown-item>
-              <el-dropdown-item command="bakcup">{{$t("common.backupRestore")}}</el-dropdown-item>
-              <el-dropdown-item divided @click.native="logout">{{$t("common.logout")}}</el-dropdown-item>
-            </el-dropdown-menu>
-          </el-dropdown>
+          <span class="user-info"><img :src="user.avatar" />{{user.name}}</span>
+          <el-popover ref="popover-personal" placement="bottom-end" trigger="click" :visible-arrow="false">
+            <personal-panel :user="user"></personal-panel>
+          </el-popover>
         </el-menu-item>
       </el-menu>
     </span>
@@ -59,18 +76,28 @@ import ThemePicker from "@/components/ThemePicker"
 import LangSelector from "@/components/LangSelector"
 import Action from "@/components/Toolbar/Action"
 import Backup from "@/views/Backup/Backup"
+import NoticePanel from "@/views/Core/NoticePanel"
+import MessagePanel from "@/views/Core/MessagePanel"
+import PersonalPanel from "@/views/Core/PersonalPanel"
 export default {
   components:{
         Hamburger,
         ThemePicker,
         LangSelector,
         Action,
-        Backup
+        Backup,
+        NoticePanel,
+        MessagePanel,
+        PersonalPanel
   },
   data() {
     return {
-      userName: "Louis",
-      userAvatar: "",
+      user: {
+        name: "Louis",
+        avatar: "",
+        role: "超级管理员",
+        registeInfo: "注册时间：2018-12-20 "
+      },
       activeIndex: '1',
       langVisible: false,
       backupVisible: false
@@ -97,12 +124,6 @@ export default {
       this.$i18n.locale = lang
       this.langVisible = false
     },
-    // 处理下拉选项
-    handleCommand(command) {
-      if('bakcup' === command) {
-        this.handleBackup()
-      }
-    },
     // 打开备份还原界面
     handleBackup: function() {
       this.backupVisible = true
@@ -117,28 +138,14 @@ export default {
         this.$api.login.logout().then((res) => {
           }).catch(function(res) {
         })
-    },
-    // 退出登录
-    logout: function() {
-      this.$confirm("确认退出吗?", "提示", {
-        type: "warning"
-      })
-      .then(() => {
-        sessionStorage.removeItem("user")
-        this.$router.push("/login")
-        this.$api.login.logout().then((res) => {
-          }).catch(function(res) {
-        })
-      })
-      .catch(() => {})
     }
   },
   mounted() {
     this.sysName = "Kitty Platform"
     var user = sessionStorage.getItem("user")
     if (user) {
-      this.userName = user
-      this.userAvatar = require("@/assets/user.png")
+      this.user.name = user
+      this.user.avatar = require("@/assets/user.png")
     }
   },
   computed:{
@@ -190,6 +197,10 @@ export default {
     margin: 10px 0px 10px 10px;
     float: right;
   }
+}
+.badge {
+  
+  line-height: 18px;
 }
 .position-left {
   left: 200px;
