@@ -84,12 +84,13 @@ export default {
 .message-panel {
   font-size: 15px;
   width: 300px;
+  margin: -12px;
 }
 .message-header {
-  padding-left: 5px;
+  padding-left: 10px;
   font-size: 14px;
-  padding-top: 2px;
-  padding-bottom: 5px;
+  padding-top: 6px;
+  padding-bottom: 6px;
 }
 .message-content {
   font-size: 15px;
@@ -104,10 +105,9 @@ export default {
 .message-item:hover {
   cursor: pointer;
   background: #b1a6a61e;
-  /* font-size: 16px; */
 }
 .message-avatar {
-  padding-left: 5px;
+  padding-left: 10px;
 }
 .avatar {
   margin-right: 10px;
@@ -119,7 +119,7 @@ export default {
 .time {
   font-size: 12px;
   float: right;
-  padding-right: 5px;
+  padding-right: 10px;
 }
 .message-footer {
   font-size: 14px;

@@ -63,12 +63,13 @@ export default {
 .notice-panel {
   font-size: 15px;
   width: 250px;
+  margin: -12px;
 }
 .header {
-  padding-left: 5px;
+  padding-left: 10px;
   font-size: 14px;
-  padding-top: 2px;
-  padding-bottom: 5px;
+  padding-top: 6px;
+  padding-bottom: 6px;
 }
 .notice-content {
   font-size: 15px;
@@ -83,10 +84,9 @@ export default {
 .notice-item:hover {
   cursor: pointer;
   background: #b1a6a61e;
-  /* font-size: 16px; */
 }
 .notice-icon {
-  padding-left: 5px;
+  padding-left: 10px;
   padding-right: 5px;
 }
 .notice-footer {

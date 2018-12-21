@@ -94,6 +94,7 @@ export default {
   border-width: 1px;
   border-style: solid;
   background: rgba(180, 176, 176, 0.1);
+  margin: -12px;
 }
 .personal-desc {
   background: rgb(19, 138, 156);

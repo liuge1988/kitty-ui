@@ -199,7 +199,6 @@ export default {
   }
 }
 .badge {
-  
   line-height: 18px;
 }
 .position-left {
