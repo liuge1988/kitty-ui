@@ -21,7 +21,7 @@ export default {
   props: {
     data: {
       type: Array,
-      default: [
+      default: () => [
         {
           key: "1",
           icon:'fa fa-envelope-o',

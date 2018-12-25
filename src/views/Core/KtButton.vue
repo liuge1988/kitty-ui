@@ -1,5 +1,5 @@
 <template>
-  <el-button :size="size" :type="type" 
+  <el-button :size="size" :type="type" :icon="icon"
     :loading="loading" :disabled="!hasPerms(perms)" @click="handleClick">
     {{label}}
   </el-button>
@@ -13,6 +13,10 @@ export default {
     label: {  // 按钮显示文本
       type: String,
       default: 'Button'
+    },
+    icon: {  // 按钮显示图标
+      type: String,
+      default: ''
     },
     size: {  // 按钮尺寸
       type: String,

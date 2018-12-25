@@ -2,7 +2,7 @@
     "common": {
         "home": "首页",
         "login": "登录",
-        "logout": "退出",
+        "logout": "退出登录",
         "doc": "文档",
         "blog": "博客",
         "projectRepo": "项目",

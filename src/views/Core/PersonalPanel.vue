@@ -8,7 +8,10 @@
           <span class="sender">{{ user.name }} - {{ user.role }}</span>  
         </div>  
         <div class="registe-info">
-          <span class="registe-info">{{ user.registeInfo }}</span>
+          <span class="registe-info">
+            <li class="fa fa-clock-o"></li>
+            {{ user.registeInfo }}
+          </span>
         </div>  
     </div>
     <div class="personal-relation">
@@ -18,37 +21,46 @@
     </div>
     <div class="main-operation">
         <span class="main-operation-item">
-          <el-button size="small">个人中心</el-button>
+          <el-button size="small" icon="fa fa-male"> 个人中心</el-button>
         </span>    
         <span class="main-operation-item">
-          <el-button size="small">修改密码</el-button>
+          <el-button size="small" icon="fa fa-key"> 修改密码</el-button>
         </span>    
     </div>
     <div class="other-operation">
         <div class="other-operation-item">
-          <li class="fa fa-bell-o"></li>
+          <li class="fa fa-eraser"></li>
           清除缓存
         </div>    
         <div class="other-operation-item">
-          <li class="fa fa-bell-o"></li>
+          <li class="fa fa-user"></li>
           在线人数
         </div>    
         <div class="other-operation-item">
-          <li class="fa fa-bell-o"></li>
+          <li class="fa fa-bell"></li>
           访问次数
         </div>    
-        <div class="other-operation-item">
-          <li class="fa fa-bell-o"></li>
-          访问时间
+        <div class="other-operation-item" @click="handleBackup">
+          <li class="fa fa-undo"></li>
+          {{$t("common.backupRestore")}}
         </div>    
     </div>
-    <div class="personal-footer" @click="logout">{{$t("common.logout")}}</div>
+    <div class="personal-footer" @click="logout">
+      <li class="fa fa-sign-out"></li>
+      {{$t("common.logout")}}
+    </div>
+    <!--备份还原界面-->
+  <backup ref="backup" v-if="backupVisible" @afterRestore="afterRestore">  </backup>
   </div>
 </template>
 
 <script>
+import Backup from "@/views/Backup/Backup"
 export default {
   name: 'PersonalPanel',
+  components:{
+    Backup
+  },
   props: {
     user: {
       type: Object,
@@ -62,6 +74,7 @@ export default {
   },
   data() {
     return {
+      backupVisible: false
     }
   },
   methods: {
@@ -78,6 +91,21 @@ export default {
         })
       })
       .catch(() => {})
+    },
+    // 打开备份还原界面
+    handleBackup: function() {
+      this.backupVisible = true
+      this.$nextTick(() => {
+          this.$refs.backup.init()
+      })
+    },
+    // 成功还原之后，重新登录
+    afterRestore: function() {
+        sessionStorage.removeItem("user")
+        this.$router.push("/login")
+        this.$api.login.logout().then((res) => {
+          }).catch(function(res) {
+        })
     }
   },
   mounted() {
@@ -130,7 +158,7 @@ export default {
   border-top-style: solid;
 }
 .main-operation-item {
-  margin: 20px;
+  margin: 15px;
 }
 .other-operation {
   padding: 15px;

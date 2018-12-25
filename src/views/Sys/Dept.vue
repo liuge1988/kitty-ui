@@ -7,10 +7,10 @@
 				<el-input v-model="filters.name" placeholder="名称"></el-input>
 			</el-form-item>
 			<el-form-item>
-				<kt-button :label="$t('action.search')" perms="sys:dept:view" type="primary" @click="findTreeData(null)"/>
+				<kt-button icon="fa fa-search" :label="$t('action.search')" perms="sys:dept:view" type="primary" @click="findTreeData(null)"/>
 			</el-form-item>
 			<el-form-item>
-				<kt-button :label="$t('action.add')" perms="sys:dept:add" type="primary" @click="handleAdd"/>
+				<kt-button icon="fa fa-plus" :label="$t('action.add')" perms="sys:dept:add" type="primary" @click="handleAdd"/>
 			</el-form-item>
 		</el-form>
 	</div>
@@ -38,8 +38,8 @@
       <el-table-column
         fixed="right" header-align="center" align="center" width="180" :label="$t('action.operation')">
         <template slot-scope="scope">
-          <kt-button :label="$t('action.edit')" perms="sys:dept:edit" @click="handleEdit(scope.row)"/>
-          <kt-button :label="$t('action.delete')" perms="sys:dept:delete" type="danger" @click="handleDelete(scope.row)"/>
+          <kt-button icon="fa fa-edit" :label="$t('action.edit')" perms="sys:dept:edit" @click="handleEdit(scope.row)"/>
+          <kt-button icon="fa fa-trash" :label="$t('action.delete')" perms="sys:dept:delete" type="danger" @click="handleDelete(scope.row)"/>
         </template>
       </el-table-column>
     </el-table>

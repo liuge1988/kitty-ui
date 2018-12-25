@@ -7,10 +7,10 @@
 				<el-input v-model="filters.name" placeholder="角色名"></el-input>
 			</el-form-item>
 			<el-form-item>
-				<kt-button :label="$t('action.search')" perms="sys:role:view" type="primary" @click="findPage(null)"/>
+				<kt-button icon="fa fa-search" :label="$t('action.search')" perms="sys:role:view" type="primary" @click="findPage(null)"/>
 			</el-form-item>
 			<el-form-item>
-				<kt-button :label="$t('action.add')" perms="sys:role:add" type="primary" @click="handleAdd" />
+				<kt-button icon="fa fa-plus" :label="$t('action.add')" perms="sys:role:add" type="primary" @click="handleAdd" />
 			</el-form-item>
 		</el-form>
 	</div>
@@ -39,7 +39,7 @@
 		</div>
 	</el-dialog>
 	<!--角色菜单，表格树内容栏-->
-	<div class="menu-container">
+	<div class="menu-container" :v-if="true">
 		<div class="menu-header">
 			<span><B>角色菜单授权</B></span>
 		</div>
