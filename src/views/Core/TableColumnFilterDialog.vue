@@ -2,17 +2,21 @@
 		<!--表格显示列界面-->
 		<el-dialog title="表格显示列" width="40%" :visible.sync="dialogVisible" :close-on-click-modal="false">
 			<el-table ref="fitlerTable" :data="columns" tooltip-effect="dark" header-align="left" align="left"
-				style="width: 100%" @selection-change="selectionChange">
+				:size="size" style="width: 100%" @selection-change="selectionChange">
 				<el-table-column type="selection" width="40">
 				</el-table-column>
-				<el-table-column label="prop">
+				<el-table-column label="属性">
 					<template slot-scope="scope">{{ scope.row.prop }}</template>
 				</el-table-column>
-				<el-table-column label="lable">
-					<template slot-scope="scope">{{ scope.row.label }}</template>
+				<el-table-column label="列名">
+					<template slot-scope="scope">
+            <el-input :size="size" v-model="scope.row.label"></el-input>
+          </template>
 				</el-table-column>
-				<el-table-column label="minWidth">
-					<template slot-scope="scope">{{ scope.row.minWidth }}</template>
+				<el-table-column label="最小宽度">
+					<template slot-scope="scope">
+            <el-input :size="size" v-model="scope.row.minWidth"></el-input>
+          </template>
 				</el-table-column>
 			</el-table>
 			<div slot="footer" class="dialog-footer">
@@ -62,7 +66,7 @@ export default {
           filterColumns.push(column)
         }
       }
-			this.$emit('handleFilterColumns', {filterColumns: filterColumns})
+			this.$emit('handleFilterColumns', {filterColumns: JSON.parse(JSON.stringify(filterColumns))})
     },
     hasColumn: function (column) {
       for(let i = 0; i <this.selections.length; i++) {

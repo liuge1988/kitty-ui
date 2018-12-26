@@ -15,7 +15,7 @@
 		</el-form>
 	</div>
 	<div class="toolbar" style="float:right;padding-top:10px;padding-right:15px;">
-		<el-form :inline="true" :model="filters" :size="size">
+		<el-form :inline="true" :size="size">
 			<el-form-item>
 				<el-button-group>
 				<el-tooltip content="刷新" placement="top">
@@ -37,7 +37,7 @@
 	</div>
 	<!--表格内容栏-->
 	<kt-table permsEdit="sys:user:edit" permsDelete="sys:user:delete"
-		:data="pageResult" :columns="filterColumns.length > 0 ? filterColumns : columns"
+		:data="pageResult" :columns="filterColumns"
 		@findPage="findPage" @handleEdit="handleEdit" @handleDelete="handleDelete">
 	</kt-table>
 	<!--新增编辑界面-->
@@ -104,19 +104,7 @@ export default {
 			filters: {
 				name: ''
 			},
-			columns: [
-				{prop:"id", label:"ID", minWidth:50},
-				{prop:"name", label:"用户名", minWidth:120},
-				{prop:"deptName", label:"机构", minWidth:120},
-				{prop:"roleNames", label:"角色", minWidth:100},
-				{prop:"email", label:"邮箱", minWidth:120},
-				{prop:"mobile", label:"手机", minWidth:100},
-				{prop:"status", label:"状态", minWidth:70},
-				// {prop:"createBy", label:"创建人", minWidth:120},
-				// {prop:"createTime", label:"创建时间", minWidth:120, formatter:this.dateFormat}
-				// {prop:"lastUpdateBy", label:"更新人", minWidth:100},
-				// {prop:"lastUpdateTime", label:"更新时间", minWidth:120, formatter:this.dateFormat}
-			],
+			columns: [],
 			filterColumns: [],
 			pageRequest: { pageNum: 1, pageSize: 10 },
 			pageResult: {},
@@ -253,10 +241,28 @@ export default {
       	handleFilterColumns: function (data) {
 			this.filterColumns = data.filterColumns
 			this.$refs.tableColumnFilterDialog.setDialogVisible(false)
+      	},
+		// 处理表格列过滤显示
+      	initColumns: function () {
+			this.columns = [
+				{prop:"id", label:"ID", minWidth:50},
+				{prop:"name", label:"用户名", minWidth:120},
+				{prop:"deptName", label:"机构", minWidth:120},
+				{prop:"roleNames", label:"角色", minWidth:100},
+				{prop:"email", label:"邮箱", minWidth:120},
+				{prop:"mobile", label:"手机", minWidth:100},
+				{prop:"status", label:"状态", minWidth:70},
+				// {prop:"createBy", label:"创建人", minWidth:120},
+				// {prop:"createTime", label:"创建时间", minWidth:120, formatter:this.dateFormat}
+				// {prop:"lastUpdateBy", label:"更新人", minWidth:100},
+				// {prop:"lastUpdateTime", label:"更新时间", minWidth:120, formatter:this.dateFormat}
+			]
+			this.filterColumns = JSON.parse(JSON.stringify(this.columns));
       	}
 	},
 	mounted() {
 		this.findDeptTree()
+		this.initColumns()
 	}
 }
 </script>
