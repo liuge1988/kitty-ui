@@ -7,7 +7,7 @@
 用户名：admin 密码：admin
 
 温馨提示：
-有在演示环境删除数据的童鞋们，如果可以的话，麻烦动动小指，右键头像菜单，
+有在演示环境删除数据的童鞋们，如果可以的话，麻烦动动小指，点击头像面板，
 选择 -> 备份还原 帮忙恢复到系统默认备份数据，方便后来的童鞋查看，谢谢啦。
 
 ### 技术交流
@@ -228,51 +228,57 @@ kitty-ui
 
 #### 登录界面
 
-![输入图片说明](https://images.gitee.com/uploads/images/2018/1108/172409_422532b0_645970.png "屏幕截图.png")
+![输入图片说明](https://images.gitee.com/uploads/images/2018/1227/155412_c2f72f83_645970.png "屏幕截图.png")
 
 #### 用户管理
 
-![输入图片说明](https://images.gitee.com/uploads/images/2018/1011/172505_51c77c5a_645970.png "屏幕截图.png")
+![输入图片说明](https://images.gitee.com/uploads/images/2018/1227/154342_b8a9eaeb_645970.png "屏幕截图.png")
 
 #### 机构管理
 
-![输入图片说明](https://images.gitee.com/uploads/images/2018/1011/172625_e0e99bc7_645970.png "屏幕截图.png")
+![输入图片说明](https://images.gitee.com/uploads/images/2018/1227/154417_7aefe6c2_645970.png "屏幕截图.png")
 
 #### 角色管理
 
-![输入图片说明](https://images.gitee.com/uploads/images/2018/1011/172658_1b438eb2_645970.png "屏幕截图.png")
+![输入图片说明](https://images.gitee.com/uploads/images/2018/1227/154431_6d8efe43_645970.png "屏幕截图.png")
 
 #### 菜单管理
 
-![输入图片说明](https://images.gitee.com/uploads/images/2018/1011/172716_7a5a26a9_645970.png "屏幕截图.png")
+![输入图片说明](https://images.gitee.com/uploads/images/2018/1227/154446_61cd21a5_645970.png "屏幕截图.png")
 
 #### 字典管理
 
-![输入图片说明](https://images.gitee.com/uploads/images/2018/1011/172729_4fd54dbe_645970.png "屏幕截图.png")
+![输入图片说明](https://images.gitee.com/uploads/images/2018/1227/154459_22ae6f2d_645970.png "屏幕截图.png")
 
 #### 系统日志
 
-![输入图片说明](https://images.gitee.com/uploads/images/2018/1011/172747_719d67a0_645970.png "屏幕截图.png")
+![输入图片说明](https://images.gitee.com/uploads/images/2018/1227/154510_3c1bfd3f_645970.png "屏幕截图.png")
 
-#### 系统监控
+#### 数据监控
 
 用户名：admin, 密码:admin，即服务端配置的密码
 
-![输入图片说明](https://images.gitee.com/uploads/images/2018/1011/172830_5e3e1daa_645970.png "屏幕截图.png")
+![输入图片说明](https://images.gitee.com/uploads/images/2018/1227/154556_8de439d5_645970.png "屏幕截图.png")
+
+#### 服务监控
+
+![输入图片说明](https://images.gitee.com/uploads/images/2018/1227/154701_6bcd25f2_645970.png "屏幕截图.png")
+
+#### 注册中心
+
+![输入图片说明](https://images.gitee.com/uploads/images/2018/1227/154734_877e893e_645970.png "屏幕截图.png")
 
 #### 接口文档
 
-![输入图片说明](https://images.gitee.com/uploads/images/2018/1011/172928_f63c7f63_645970.png "屏幕截图.png")
+![输入图片说明](https://images.gitee.com/uploads/images/2018/1227/154803_6a612548_645970.png "屏幕截图.png")
+
+#### 代码生成
+
+![输入图片说明](https://images.gitee.com/uploads/images/2018/1227/154840_18fc781c_645970.png "屏幕截图.png")
 
 #### 主题切换
 
-![输入图片说明](https://images.gitee.com/uploads/images/2018/1011/173415_ef0dc20b_645970.png "屏幕截图.png")
-
-### 使用说明
-
-1. xxxx
-2. xxxx
-3. xxxx
+![输入图片说明](https://images.gitee.com/uploads/images/2018/1227/154943_1752c336_645970.png "屏幕截图.png")
 
 ### 参与贡献
 
