@@ -234,7 +234,7 @@ export default {
           	return format(row[column.property])
       	},
 		// 处理表格列过滤显示
-      	displayFilterColumnsDialog: function (filterColumns) {
+      	displayFilterColumnsDialog: function () {
 			this.$refs.tableColumnFilterDialog.setDialogVisible(true)
       	},
 		// 处理表格列过滤显示

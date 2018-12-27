@@ -1,7 +1,7 @@
 <template>
 		<!--表格显示列界面-->
 		<el-dialog title="表格显示列" width="40%" :visible.sync="dialogVisible" :close-on-click-modal="false">
-			<el-table ref="fitlerTable" :data="columns" tooltip-effect="dark" header-align="left" align="left"
+			<el-table ref="fitlerTable" :data="columns"  height="330px" tooltip-effect="dark" header-align="left" align="left"
 				:size="size" style="width: 100%" @selection-change="selectionChange">
 				<el-table-column type="selection" width="40">
 				</el-table-column>
@@ -53,7 +53,7 @@ export default {
       this.selections = selections
       
     },
-    // 设置
+    // 设置可见性
     setDialogVisible: function (visible) {
       this.dialogVisible = visible
     },

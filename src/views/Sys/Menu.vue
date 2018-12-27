@@ -50,7 +50,7 @@
         prop="orderNum" header-align="center" align="center" label="排序">
       </el-table-column>
       <el-table-column
-        fixed="right" header-align="center" align="center" width="180" :label="$t('action.operation')">
+        fixed="right" header-align="center" align="center" width="185" :label="$t('action.operation')">
         <template slot-scope="scope">
           <kt-button icon="fa fa-edit" :label="$t('action.edit')" perms="sys:menu:edit" @click="handleEdit(scope.row)"/>
           <kt-button icon="fa fa-trash" :label="$t('action.delete')" perms="sys:menu:delete" type="danger" @click="handleDelete(scope.row)"/>

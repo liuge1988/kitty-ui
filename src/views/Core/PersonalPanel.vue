@@ -40,7 +40,7 @@
           <li class="fa fa-bell"></li>
           访问次数
         </div>    
-        <div class="other-operation-item" @click="handleBackup">
+        <div class="other-operation-item" @click="showBackupDialog">
           <li class="fa fa-undo"></li>
           {{$t("common.backupRestore")}}
         </div>    
@@ -50,7 +50,7 @@
       {{$t("common.logout")}}
     </div>
     <!--备份还原界面-->
-  <backup ref="backup" v-if="backupVisible" @afterRestore="afterRestore">  </backup>
+    <backup ref="backupDialog" @afterRestore="afterRestore"></backup>
   </div>
 </template>
 
@@ -74,7 +74,6 @@ export default {
   },
   data() {
     return {
-      backupVisible: false
     }
   },
   methods: {
@@ -93,14 +92,12 @@ export default {
       .catch(() => {})
     },
     // 打开备份还原界面
-    handleBackup: function() {
-      this.backupVisible = true
-      this.$nextTick(() => {
-          this.$refs.backup.init()
-      })
+    showBackupDialog: function() {
+      this.$refs.backupDialog.setBackupVisible(true)
     },
     // 成功还原之后，重新登录
     afterRestore: function() {
+        this.$refs.backupDialog.setBackupVisible(false)
         sessionStorage.removeItem("user")
         this.$router.push("/login")
         this.$api.login.logout().then((res) => {

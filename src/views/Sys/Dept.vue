@@ -36,7 +36,7 @@
         prop="createTime" header-align="center" align="center" label="创建时间" :formatter="dateFormat">
       </el-table-column>
       <el-table-column
-        fixed="right" header-align="center" align="center" width="180" :label="$t('action.operation')">
+        fixed="right" header-align="center" align="center" width="185" :label="$t('action.operation')">
         <template slot-scope="scope">
           <kt-button icon="fa fa-edit" :label="$t('action.edit')" perms="sys:dept:edit" @click="handleEdit(scope.row)"/>
           <kt-button icon="fa fa-trash" :label="$t('action.delete')" perms="sys:dept:delete" type="danger" @click="handleDelete(scope.row)"/>
@@ -117,7 +117,7 @@ export default {
     findTreeData: function () {
       this.loading = true
 			this.$api.dept.findDeptTree().then((res) => {
-        this.tableTreeDdata = res.data.content
+        this.tableTreeDdata = res.data
         this.popupTreeData = this.getParentMenuTree(res.data)
         this.loading = false
 			})
