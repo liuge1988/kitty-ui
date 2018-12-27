@@ -130,7 +130,7 @@ export default {
     border: 1px solid #eaeaea;
     box-shadow: 0 0 25px #cac6c6;
     .title {
-      margin: 0px auto 40px auto;
+      margin: 0px auto 30px auto;
       text-align: center;
       color: #505458;
     }
