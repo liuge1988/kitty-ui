@@ -30,8 +30,7 @@ export default {
       path = menu.url
     }
     // 通过菜单URL跳转至指定路由
-    this.$router.push("/")
-    this.$router.push(path)
+    this.$router.push("/" + path)
     }
   }
 }
