@@ -23,16 +23,9 @@ const router = new Router({
           name: '系统介绍', 
           component: Intro,
           meta: {
-            icon: 'fa fa-home fa-lg'
+            icon: 'fa fa-home fa-lg',
+            index: 0
           }
-        },
-        { 
-          path: '/generator/generator', 
-          name: '代码生成', 
-          component: Generator,
-          meta: {
-            icon: 'el-icon-mobile-phone'
-          } 
         }
       ]
     },
@@ -86,7 +79,8 @@ function addDynamicMenuAndRoutes(userName, to, from) {
   .then(res => {
     // 添加动态路由
     let dynamicRoutes = addDynamicRoutes(res.data)
-    router.options.routes[0].children = router.options.routes[0].children.concat(dynamicRoutes)
+    // 处理静态组件绑定路由
+    handleStaticComponent(router, dynamicRoutes)
     router.addRoutes(router.options.routes)
     // 保存加载状态
     store.commit('menuRouteLoaded', true)
@@ -100,6 +94,20 @@ function addDynamicMenuAndRoutes(userName, to, from) {
   })
   .catch(function(res) {
   })
+}
+
+/**
+ * 处理路由到本地直接指定页面组件的情况
+ * 比如'代码生成'是要求直接绑定到'Generator'页面组件
+ */
+function handleStaticComponent(router, dynamicRoutes) {
+  for(let j=0;j<dynamicRoutes.length; j++) {
+    if(dynamicRoutes[j].name == '代码生成') {
+      dynamicRoutes[j].component = Generator
+      break
+    }
+  }
+  router.options.routes[0].children = router.options.routes[0].children.concat(dynamicRoutes)
 }
 
 /**
@@ -137,7 +145,8 @@ function addDynamicRoutes (menuList = [], routes = []) {
         component: null,
         name: menuList[i].name,
         meta: {
-          icon: menuList[i].icon
+          icon: menuList[i].icon,
+          index: menuList[i].id
         }
       }
       let path = getIFramePath(menuList[i].url)
