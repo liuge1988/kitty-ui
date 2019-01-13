@@ -68,8 +68,10 @@ export default {
       }
       this.mainTabsActiveName = tab.name
       // 切换标签页时同步更新高亮菜单
-      this.$refs.navmenu.activeIndex = route.meta.index
-      this.$refs.navmenu.initOpenedMenu()
+      if(this.$refs.navmenu != null) {
+        this.$refs.navmenu.activeIndex = '' + route.meta.index
+        this.$refs.navmenu.initOpenedMenu()
+      }
     }
   }
 }
