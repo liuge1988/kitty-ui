@@ -15,7 +15,7 @@
 		</el-form>
 	</div>
 	<!--表格内容栏-->
-	<kt-table permsEdit="sys:dict:edit" permsDelete="sys:dict:delete"
+	<kt-table :height="350" permsEdit="sys:dict:edit" permsDelete="sys:dict:delete"
 		:data="pageResult" :columns="columns" 
 		@findPage="findPage" @handleEdit="handleEdit" @handleDelete="handleDelete">
 	</kt-table>
